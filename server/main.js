@@ -44,7 +44,7 @@ app.use(morgan('dev'));
 app.set('jwt-secret', config.secret);
 
 // index page, just for testing
-app.get('/test', (req, res) => {
+app.get('/', (req, res) => {
     return res.send('Hello JWT');
 });
 

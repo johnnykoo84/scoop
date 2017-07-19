@@ -11,6 +11,7 @@ const User = require('../../../models/user');
 
 exports.register = (req, res) => {
   const { username, password } = req.body;
+  console.log('username', username, 'password', password)
   let newUser = null;
 
   // create a new user if does not exist
@@ -18,7 +19,9 @@ exports.register = (req, res) => {
     if (user) {
       throw new Error('username exist');
     } else {
+      console.log('here before')
       return User.create(username, password);
+      console.log('hi')
     }
   };
 

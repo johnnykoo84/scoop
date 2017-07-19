@@ -8,7 +8,7 @@ const User = new Schema({
 });
 
 // create new User document
-User.statics.create = function(username, passowrd) {
+User.statics.create = function(username, password) {
   const user = new this({
     username,
     password

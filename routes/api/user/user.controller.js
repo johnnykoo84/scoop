@@ -14,7 +14,7 @@ exports.list = (req, res) => {
 
   User.find({}, '-password').exec()
     .then(
-      users => {
+      (users) => {
         res.json({ users });
       }
     );
@@ -34,7 +34,7 @@ exports.assignAdmin = (req, res) => {
 
   User.findOneByUsername(req.params.username)
     .then(
-      user => {
+      (user) => {
         if (!user) throw new Error('user not found');
         user.assignAdmin();
       }
