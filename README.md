@@ -1,17 +1,17 @@
-# React-Express-HMR-Example
+# React-Express-HMR-Example for project scoop
 
 ## About
 This is an example project that uses React.js on Express.js server. In development environment, webpack-dev-server will be launched together with Express.js server that has Hot Module Replacement enabled using react-hot-loader.   
 Both of client-side and server-side codes are written in ES6 syntax.
-    
+
 The port of Express.js server is 3000 and port of webpack-dev-server is 3001.
-  
+
 ## Installation
 ```
 npm install -g webpack babel
 npm install
 ```
-  
+
 ## Scripts
 ### clean
 ```bash
