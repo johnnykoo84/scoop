@@ -1,4 +1,4 @@
-# React-Express-HMR-Example for project scoop
+# project scoop
 
 ## About
 This is an example project that uses React.js on Express.js server. In development environment, webpack-dev-server will be launched together with Express.js server that has Hot Module Replacement enabled using react-hot-loader.   
@@ -31,5 +31,6 @@ npm run start
 ### development
 ```bash
 # starts the server with development environment
-npm run development
+# this will automatically do clean & build & run the server
+npm run dev
 ```
