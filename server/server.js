@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 });
 
 // configure api router
-app.use('/api', require('../routes/api'));
+app.use('/api', require('./routes/api'));
 
 // open the server
 const server = app.listen(port, () => {
