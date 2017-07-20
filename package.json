@@ -6,19 +6,24 @@
   "scripts": {
     "clean": "rm -rf build public/bundle.js",
     "build": "babel server --out-dir build && webpack",
-    "start": "NODE_ENV=production node ./build/main.js",
-    "dev": "npm run clean && npm run build && NODE_ENV=dev node ./build/main.js"
+    "start": "NODE_ENV=production node ./build/server.js",
+    "dev": "npm run clean && npm run build && NODE_ENV=dev node ./build/server.js"
   },
   "author": "johnnykoo <johnnykoo@kooslab.com> (kooslab.com)",
   "license": "ISC",
   "dependencies": {
+    "apollo-client": "^1.9.0-0",
     "body-parser": "^1.17.2",
     "express": "^4.13.4",
+    "express-graphql": "^0.6.6",
+    "graphql": "^0.10.5",
     "jsonwebtoken": "^7.4.1",
     "mongoose": "^4.11.3",
     "morgan": "^1.8.2",
     "react": "^15.0.2",
-    "react-dom": "^15.0.2"
+    "react-apollo": "^1.4.6",
+    "react-dom": "^15.0.2",
+    "react-router": "^3.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
