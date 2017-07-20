@@ -21,7 +21,7 @@ const port = 3000;
 const devPort = 3001;
 
 
-if(process.env.NODE_ENV == 'development') {
+if(process.env.NODE_ENV == 'dev') {
     console.log('Server is running on development mode');
 
     const config = require('../webpack.dev.config');
