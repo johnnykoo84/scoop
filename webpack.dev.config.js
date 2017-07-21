@@ -1,16 +1,21 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
 
   entry: [
-    './client/index.js',
+    path.resolve('./client/index.js'),
     'webpack-dev-server/client?http://0.0.0.0:3001',
     'webpack/hot/only-dev-server'
   ],
 
   output: {
-    path: '/',
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
+  },
+
+  resolve: {
+    extensions: ['.js', '.jsx']
   },
 
   devServer: {
@@ -26,18 +31,19 @@ module.exports = {
 
     plugins: [
       new webpack.HotModuleReplacementPlugin(), // Enable HMR
-      new webpack.NoErrorsPlugin()
+      new webpack.NoEmitOnErrorsPlugin()
     ],
 
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: ['react-hot', 'babel-loader?' + JSON.stringify({
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        include: path.join(__dirname, 'client'),
+        loader: ['react-hot-loader', 'babel-loader?' + JSON.stringify({
           cacheDirectory: true,
           presets: ['es2015', 'react']
         })],
-        exclude: /node_modules/,
       },
     ]
   }

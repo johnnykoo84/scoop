@@ -4,7 +4,7 @@ class Dashboard extends Component {
   render() {
     return(
       <div>
-        Hello Scoop Dashboard
+        Hello Scoop Dashboard@
       </div>
     )
   }

@@ -20,7 +20,7 @@ const Root = () => {
     <ApolloProvider client={client}>
       <Router history={hashHistory}>
         <Route path="/" component={App}>
-          <IndexRoute component={SongList} />
+          <IndexRoute component={Dashboard} />
           <Route path="songs/new" component={SongCreate} />
           <Route path="songs/:id" component={SongDetail} />
         </Route>
