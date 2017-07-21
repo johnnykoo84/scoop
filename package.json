@@ -1,5 +1,5 @@
 {
-  "name": "react-express-hmr",
+  "name": "scoop",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,12 +18,15 @@
     "express-graphql": "^0.6.6",
     "graphql": "^0.10.5",
     "jsonwebtoken": "^7.4.1",
+    "lodash": "^4.17.4",
     "mongoose": "^4.11.3",
     "morgan": "^1.8.2",
     "react": "^15.0.2",
     "react-apollo": "^1.4.6",
     "react-dom": "^15.0.2",
-    "react-router": "^3.0.2"
+    "react-router": "^3.0.2",
+    "semantic-ui-css": "^2.2.11",
+    "semantic-ui-react": "^0.71.1"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
@@ -37,7 +40,7 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "react-hot-loader": "^1.3.0",
-    "webpack": "^1.13.0",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^3.3.0",
+    "webpack-dev-server": "^2.5.1"
   }
 }

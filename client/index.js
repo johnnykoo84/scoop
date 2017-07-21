@@ -8,7 +8,7 @@ import App from './components/App';
 import SongList from './components/SongList';
 import SongCreate from './components/SongCreate';
 import SongDetail from './components/SongDetail';
-
+import Dashboard from './components/Dashboard';
 // tell apollo to use id to identify every piece
 // of and tell react whatever is updated
 const client = new ApolloClient({
