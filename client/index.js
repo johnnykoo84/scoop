@@ -4,6 +4,8 @@ import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import ApolloClient from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 
+// import 'semantic-ui-css/semantic.css'; //  this gives me @ error...I don't know why
+
 import App from './components/App';
 import SongList from './components/SongList';
 import SongCreate from './components/SongCreate';

@@ -1,23 +1,25 @@
+const path = require('path');
+
 module.exports = {
 
-    entry: './client/index.js',
+  entry: './client/index.js',
 
-    output: {
-        path: __dirname + '/public',
-        filename: 'bundle.js'
-    },
+  output: {
+    path: __dirname + '/public',
+    filename: 'bundle.js'
+  },
 
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                query: {
-                    cacheDirectory: true,
-                    presets: ['es2015', 'react']
-                }
-            }
-        ]
-    }
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        include: path.join(__dirname, 'client'),
+        use: ['react-hot-loader', 'babel-loader?' + JSON.stringify({
+          cacheDirectory: true,
+          presets: ['es2015', 'react']
+        })],
+      }
+    ]
+  }
 };

@@ -1,5 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const extractCSS = new ExtractTextPlugin('semantic/semantic.min.css');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
 
@@ -15,7 +19,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.css']
   },
 
   devServer: {
@@ -31,7 +35,9 @@ module.exports = {
 
     plugins: [
       new webpack.HotModuleReplacementPlugin(), // Enable HMR
-      new webpack.NoEmitOnErrorsPlugin()
+      new webpack.NoEmitOnErrorsPlugin(),
+      extractCSS,
+      new webpack.LoaderOptionsPlugin({ options: { postcss: [ autoprefixer ] } })
     ],
 
   module: {
@@ -40,11 +46,11 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         include: path.join(__dirname, 'client'),
-        loader: ['react-hot-loader', 'babel-loader?' + JSON.stringify({
+        use: ['react-hot-loader', 'babel-loader?' + JSON.stringify({
           cacheDirectory: true,
           presets: ['es2015', 'react']
         })],
-      },
+      }
     ]
   }
 };
