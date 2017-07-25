@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
+import Navbar from './Navbar';
 
 class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Button primary>
-          allright
-        </Button>
+        <Navbar />
+        This is a Dashboard page
       </div>
     )
   }

@@ -11,6 +11,10 @@ import SongList from './components/SongList';
 import SongCreate from './components/SongCreate';
 import SongDetail from './components/SongDetail';
 import Dashboard from './components/Dashboard';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import Pricing from './components/Pricing';
+import Features from './components/Features';
 // tell apollo to use id to identify every piece
 // of and tell react whatever is updated
 const client = new ApolloClient({
@@ -23,6 +27,10 @@ const Root = () => {
       <Router history={hashHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={Dashboard} />
+          <Route path="signup" component={Signup} />
+          <Route path="login" component={Login} />
+          <Route path="features" component={Features} />
+          <Route path="pricing" component={Pricing} />
           <Route path="songs/new" component={SongCreate} />
           <Route path="songs/:id" component={SongDetail} />
         </Route>
