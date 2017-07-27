@@ -7,9 +7,6 @@ import { ApolloProvider } from 'react-apollo';
 // import 'semantic-ui-css/semantic.css'; //  this gives me @ error...I don't know why
 
 import App from './components/App';
-import SongList from './components/SongList';
-import SongCreate from './components/SongCreate';
-import SongDetail from './components/SongDetail';
 import Dashboard from './components/Dashboard';
 import Signup from './components/Signup';
 import Login from './components/Login';
@@ -31,8 +28,6 @@ const Root = () => {
           <Route path="login" component={Login} />
           <Route path="features" component={Features} />
           <Route path="pricing" component={Pricing} />
-          <Route path="songs/new" component={SongCreate} />
-          <Route path="songs/:id" component={SongDetail} />
         </Route>
       </Router>
     </ApolloProvider>
