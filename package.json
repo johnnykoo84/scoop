@@ -7,7 +7,7 @@
     "clean": "rm -rf build public/bundle.js",
     "build": "babel server --out-dir build && webpack",
     "start": "NODE_ENV=production node ./build/server.js",
-    "dev": "npm run clean && npm run build && NODE_ENV=dev node ./build/server.js"
+    "dev": "npm run clean && NODE_ENV=dev nodemon ./server/server.js"
   },
   "author": "johnnykoo <johnnykoo@kooslab.com> (kooslab.com)",
   "license": "ISC",
