@@ -4,9 +4,20 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
-  email: String,
-  password: String,
-  admin: { type: Boolean, default: false },
+  email: {
+    type: String,
+    lowercase: true,
+    unique: true,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  admin: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // user's password is never saved in plain text String
@@ -32,8 +43,8 @@ UserSchema.pre('save', function save(next) {
 });
 
 // Create method to compare password
-UserSchema.methods.comparePassword = function(pw, cb) {
-  bcrypt.compare(pw, this.password, (err, isMatch) => {
+UserSchema.methods.comparePassword = function comparePassword(candidatePassword, cb) {
+  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     if (err) {
       return cb(err);
     }
@@ -42,20 +53,25 @@ UserSchema.methods.comparePassword = function(pw, cb) {
 };
 
 // create new UserSchema document
-UserSchema.statics.create = function(username, password) {
+UserSchema.statics.create = function(email, password) {
   const user = new this({
-    username,
+    email,
     password
-  })
+  });
 
   // return the Promise
-  return user.save()
+  return user.save();
 };
 
+// find all users
+UserSchema.statics.findAll = function() {
+  return this.find({}).exec();
+}
+
 // find one user by using username
-UserSchema.statics.findOneByUsername = function(username) {
+UserSchema.statics.findOneByEmail = function(email) {
   return this.findOne({
-    username
+    email
   }).exec();
 };
 

@@ -80,8 +80,7 @@ require('./middlewares/passport')(passport);
 const apiRoutes = express.Router();
 
 // register new users -> this has to be adopted for graphql
-apiRoutes.post('/register', function(req, res) {
-  console.log('hi are you there')
+apiRoutes.post('/register', (req, res) => {
   if (!req.body.email || !req.body.password) {
     res.json({ success: false, message: 'Please enter an email and password to register'});
   } else {
@@ -91,7 +90,7 @@ apiRoutes.post('/register', function(req, res) {
     });
 
     // Atempt to save the new user
-    newUser.save(function(err) {
+    newUser.save((err) => {
       if (err) {
         return res.json({ success: false, message: 'That email address already exists' });
       }
@@ -101,10 +100,10 @@ apiRoutes.post('/register', function(req, res) {
 });
 
 // Authenticate the user and get a JWT
-apiRoutes.post('/Authenticate', function(req, res) {
+apiRoutes.post('/Authenticate', (req, res) => {
   User.findOne({
     email: req.body.email
-  }, function(err, user) {
+  }, (err, user) => {
     if (err) throw err;
 
     if (!user) {
@@ -127,24 +126,19 @@ apiRoutes.post('/Authenticate', function(req, res) {
 });
 
 // Protect dashboard route with JWT
-apiRoutes.get('/dashboard', passport.authenticate('jwt', { session: false }), function(req, res) {
-  res.send('It worked! User id is: ' + req.user._id + '.');
-});
+// apiRoutes.get('/dashboard', passport.authenticate('jwt', { session: false }), function(req, res) {
+//   res.send('It worked! User id is: ' + req.user._id + '.');
+// });
 
 // Set url for API group routes
 app.use('/api', apiRoutes);
 
 // graphql part
-// app.use('/graphql', expressGraphQL({
-//   schema,
-//   graphiql: true
-// }));
+app.use('/graphql', expressGraphQL({
+  schema,
+  graphiql: true
+}));
 
-
-// index page, just for testing
-// app.get('/', (req, res) => {
-//     return res.send('Hello JWT');
-// });
 
 // configure api router
 // app.use('/api', require('./routes/api'));
