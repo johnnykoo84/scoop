@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 import { Container, Button, Checkbox, Form, Modal, Input, Message} from 'semantic-ui-react';
+import FormField from '../../containers/formfield';
 
 class SignUp extends Component {
   handleFormValues(values) {
@@ -14,33 +15,8 @@ class SignUp extends Component {
 
   }
 
-  renderInput({
-    input, label, type, placeholder,
-    meta: { touched, error, warning },
-    as: As = Input,
-    ...props
-  }) {
-    return (
-      <Form.Field>
-        <As
-          {...props}
-          {...input}
-          value={input.value}
-          type={type}
-          label={label}
-          placeholder={placeholder}
-        />
-            {touched && ((error && <Message negative><i>{error}</i></Message>)) || (warning && <Message negative><i>{warning}</i></Message>)}
-        {/* <label>{label}:</label> */}
-        {/* <input type={field.type} {...field.input } /> */}
-        {/* {touched && error && <span><i>{error}</i></span>} */}
-      </Form.Field>
-    );
-  }
-
   renderAlert() {
     if (this.props.errorMessage) {
-      console.log('herer???????')
       return (
         <Message negative>
           <Message.Header>Oops!</Message.Header>
@@ -64,7 +40,7 @@ class SignUp extends Component {
         >
           <Field
             name="email"
-            component={this.renderInput}
+            component={FormField}
             as={Form.Input}
             type="email"
             label="Email 주소"
@@ -72,7 +48,7 @@ class SignUp extends Component {
           />
           <Field
             name="password"
-            component={this.renderInput}
+            component={FormField}
             as={Form.Input}
             type="password"
             label="비밀번호"
@@ -80,7 +56,7 @@ class SignUp extends Component {
           />
           <Field
             name="passwordConfirm"
-            component={this.renderInput}
+            component={FormField}
             as={Form.Input}
             type="password"
             label="비밀번호 재확인"

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
-const ROOT_URL = 'http://localhost:3090';
+const ROOT_URL = 'http://localhost:3001/api';
 import {
   AUTH_USER,
   UNAUTH_USER,
@@ -31,8 +31,8 @@ export function signinUser({ email, password }, callback) {
 export function signupUser({ email, password }, callback) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/signup`, { email, password })
-      .then(response => {
-
+      .then((response) => {
+        console.log('response', response)
         dispatch({ type: AUTH_USER });
 
         localStorage.setItem('token', response.data.token);
@@ -45,7 +45,8 @@ export function signupUser({ email, password }, callback) {
       //   dispatch(authError(response.data.error));
       // });
       .catch((error) => {
-        dispatch(authError(error.response.data.error));
+        console.log('error?', error)
+        dispatch(authError(error.response.data));
       });
   }
 }

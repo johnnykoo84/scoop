@@ -10,7 +10,15 @@ export default function semanticFormField ({ input, type, label, placeholder, me
   }
   return (
     <Form.Field>
-      <As {...props} {...input} value={input.value} type={type} label={label} placeholder={placeholder} onChange={handleChange} />
+      <As
+        {...props}
+        {...input}
+        value={input.value} 
+        type={type}
+        label={label}
+        placeholder={placeholder}
+        onChange={handleChange}
+      />
       {touched && ((error && <span><i>{error}</i></span>) || (warning && <span><i>{warning}</i></span>))}
     </Form.Field>
   );
@@ -55,7 +63,15 @@ const options = [
 const ComponentForm = (props) => {
   return (
     <Form name="product" onSubmit={handleSubmit(onSubmit)}>
-      <Field name="selectExample" component={semanticFormField} as={Form.Select} options={options} label="Select label" placeholder="Select an option" validate={required} />
+      <Field
+        name="selectExample"
+        component={semanticFormField}
+        as={Form.Select}
+        options={options}
+        label="Select label"
+        placeholder="Select an option"
+        validate={required}
+      />
       <Field name="textInputExample" component={semanticFormField} as={Form.Input} type="text" label="Input label" placeholder="Text Input" validate={required} />
       <Field name="numberInputExample" component={semanticFormField} as={Form.Input} type="text" label="Number label" placeholder="Number Input" validate={number} />
       <Field name="emailInputExample" component={semanticFormField} as={Form.Input} type="email" label="Email label" placeholder="Email Input" validate={[required, email]} />
