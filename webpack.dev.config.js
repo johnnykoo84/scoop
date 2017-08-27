@@ -48,7 +48,7 @@ module.exports = {
         include: path.join(__dirname, 'client'),
         use: ['react-hot-loader', 'babel-loader?' + JSON.stringify({
           cacheDirectory: true,
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react', 'stage-1']
         })],
       }
     ]

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
-import Navbar from './Navbar';
+// import { Button } from 'semantic-ui-react';
+import Navbar from './navbar';
 
 class Dashboard extends Component {
   render() {

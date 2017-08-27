@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 
 const saltRounds = 10;
 const Schema = mongoose.Schema;
+
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -23,13 +24,16 @@ const UserSchema = new Schema({
 // user's password is never saved in plain text String
 // instead, we 'salt' and 'hash' it
 UserSchema.pre('save', function save(next) {
+  // get access to the user model e.g. user.email, user.password
   const user = this;
+
   if (!user.isModified('password') || this.isNew) {
     bcrypt.genSalt(saltRounds, (err, salt) => {
       if (err) {
         return next(err);
       }
-      bcrypt.hash(user.password, salt, (err, hash) => {
+
+      bcrypt.hash(user.password, salt, null, (err, hash) => {
         if (err) {
           return next(err);
         }
@@ -43,17 +47,17 @@ UserSchema.pre('save', function save(next) {
 });
 
 // Create method to compare password
-UserSchema.methods.comparePassword = function comparePassword(candidatePassword, cb) {
+UserSchema.methods.comparePassword = function comparePassword(candidatePassword, callback) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     if (err) {
-      return cb(err);
+      return callback(err);
     }
-    cb(null, isMatch);
+    callback(null, isMatch);
   });
 };
 
 // create new UserSchema document
-UserSchema.statics.create = function(email, password) {
+UserSchema.statics.create = function (email, password) {
   const user = new this({
     email,
     password
@@ -64,23 +68,23 @@ UserSchema.statics.create = function(email, password) {
 };
 
 // find all users
-UserSchema.statics.findAll = function() {
+UserSchema.statics.findAll = function () {
   return this.find({}).exec();
 }
 
 // find one user by using username
-UserSchema.statics.findOneByEmail = function(email) {
+UserSchema.statics.findOneByEmail = function (email) {
   return this.findOne({
     email
   }).exec();
 };
 
 // verify the password of the UserSchema document
-UserSchema.methods.verify = function(password) {
+UserSchema.methods.verify = function (password) {
   return this.password = password
 };
 
-UserSchema.methods.assignAdmin = function() {
+UserSchema.methods.assignAdmin = function () {
   this.admin = true;
   return this.save();
 };
