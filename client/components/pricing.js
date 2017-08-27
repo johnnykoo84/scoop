@@ -4,7 +4,7 @@ class Pricing extends Component {
   render() {
     return (
       <div>
-        This is Pricing page
+        This is Pricing page@@
       </div>
     );
   }

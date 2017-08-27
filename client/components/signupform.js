@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Button, Checkbox, Form, Modal, Header } from 'semantic-ui-react';
 
-class Signup extends Component {
+class SignupForm extends Component {
   render() {
     return (
       <Container>
@@ -41,4 +41,4 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default SignupForm;
