@@ -7,7 +7,6 @@ import FormField from '../../containers/formfield';
 
 class SignUp extends Component {
   handleFormValues(values) {
-
     // need to do something to log user in
     this.props.signupUser(values, () => {
       this.props.history.push('/features');

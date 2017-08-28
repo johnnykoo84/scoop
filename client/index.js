@@ -37,6 +37,7 @@ const Root = () => {
             <Route path="/signup" component={Signup} />
             <Route path="/pricing" component={Pricing} />
             <Route path="/features" component={Features} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route exact path="/" component={Landing} />
           </Switch>
         </div>

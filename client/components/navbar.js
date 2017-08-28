@@ -8,6 +8,7 @@ export default class Navbar extends Component {
 
     this.state = { activeItem: 'Home' };
     this.handleItemClick = this.handleItemClick.bind(this);
+    this.renderNavbar = this.renderNavbar.bind(this);
   }
 
   handleItemClick(e, { name }) {
@@ -15,51 +16,91 @@ export default class Navbar extends Component {
 
   }
 
-  render() {
+  renderNavbar() {
     const { activeItem } = this.state
 
-    return (
-      <Menu>
-        <Menu.Item
-          name="Home"
+    if (!this.props.authenticated) {
+      return (
+        <Menu>
+          <Menu.Item
+          name="home"
           active={activeItem === 'Home'}
           onClick={this.handleItemClick}
         >
-          <Link to="/">Home</Link>
+          <Link to="/">홈</Link>
         </Menu.Item>
 
         <Menu.Item
-          name="Features"
+          name="features"
           active={activeItem === 'Features'}
           onClick={this.handleItemClick}
         >
-          <Link to="/features">Features</Link>
+          <Link to="/features">기능</Link>
         </Menu.Item>
 
         <Menu.Item
-          name="Pricing"
+          name="pricing"
           active={activeItem === 'Pricing'}
           onClick={this.handleItemClick}
         >
-          <Link to="/pricing">Pricing</Link>
+          <Link to="/pricing">가격</Link>
         </Menu.Item>
 
         <Menu.Item
-          name="SignUp"
-          active={activeItem === 'SignUp'}
+          name="sign up"
+          active={activeItem === 'Sign Up'}
           onClick={this.handleItemClick}
         >
-          <Link to="/signup">SignUp</Link>
+          <Link to="/signup">회원가입</Link>
         </Menu.Item>
 
         <Menu.Item
-          name="LogIn"
-          active={activeItem === 'LogIn'}
+          name="sign in"
+          active={activeItem === 'Sign In'}
           onClick={this.handleItemClick}
         >
-          <Link to="/login">Login</Link>
+          <Link to="/signin">로그인</Link>
         </Menu.Item>
-      </Menu>
+        </Menu>
+    );
+  } else {
+    return (
+        <Menu>
+          <Menu.Item
+            name="home"
+            active={activeItem === 'home'}
+            onClick={this.handleItemClick}
+          >
+            <Link to="/">홈</Link>
+          </Menu.Item>
+
+          <Menu.Item
+            name="dashboard"
+            active={activeItem === 'dashboard'}
+            onClick={this.handleItemClick}
+          >
+            <Link to="/dashboard">대쉬보드</Link>
+          </Menu.Item>
+
+          <Menu.Item
+            name="sign out"
+            active={activeItem === 'sign out'}
+            onClick={this.handleItemClick}
+          >
+            <Link to="/signout">로그아웃</Link>
+          </Menu.Item>
+        </Menu>
+      );
+    }
+  }
+
+  render() {
+    // const { activeItem } = this.state
+
+    return (
+      <div>
+        {this.renderNavbar()}
+      </div>
     );
   }
 }
