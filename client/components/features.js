@@ -10,8 +10,8 @@ class Features extends Component {
   render() {
     return (
       <div>
-        This is Features page
-        {this.props.message}
+        <h1>This is Features page!!</h1>
+        <p>{this.props.message}</p>
       </div>
     );
   }
@@ -23,4 +23,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Features);
+export default connect(mapStateToProps, actions)(Features);

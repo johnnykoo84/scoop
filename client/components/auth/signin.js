@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import * as actions from '../../actions';
+import { Container, Button, Form, Message } from 'semantic-ui-react';
+import FormField from '../../containers/formfield';
 
 class Signin extends Component {
   handleFormValues(values) {
@@ -10,17 +12,16 @@ class Signin extends Component {
     this.props.signinUser(values, () => {
       this.props.history.push('/features');
     });
-
   }
 
-  renderInput({ label, ...field }) {
-    return (
-      <fieldset className="form-group">
-        <label>{label}:</label>
-        <input type={field.input.name} {...field.input } className="form-control" />
-      </fieldset>
-    );
-  }
+  // renderInput({ label, ...field }) {
+  //   return (
+  //     <fieldset className="form-group">
+  //       <label>{label}:</label>
+  //       <input type={field.input.name} {...field.input } className="form-control" />
+  //     </fieldset>
+  //   );
+  // }
 
   renderAlert() {
     if (this.props.errorMessage) {
@@ -36,14 +37,27 @@ class Signin extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.handleFormValues.bind(this))}>
-        <Field name="email" component={this.renderInput} label="Email" />
-        <Field name="password" component={this.renderInput} label="Password" />
-        {this.renderAlert()}
-        <button type="submit" className="btn btn-primary">
-          Sign in
-        </button>
-      </form>
+      <Container>
+        <h1>로그인</h1>
+        <form onSubmit={handleSubmit(this.handleFormValues.bind(this))}>
+          <Field
+            name="email"
+            component={FormField}
+            label="Email 주소"
+          />
+          <br />
+          <Field
+            name="password"
+            component={FormField}
+            label="비밀번호"
+          />
+          {this.renderAlert()}
+          <br />
+          <Button primary type="submit">
+            로그인
+          </Button>
+        </form>
+      </Container>
     );
   }
 }
