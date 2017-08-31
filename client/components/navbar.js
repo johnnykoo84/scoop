@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
 
@@ -12,8 +13,8 @@ export default class Navbar extends Component {
   }
 
   handleItemClick(e, { name }) {
+    console.log('item clicked', name);
     this.setState({ activeItem: name });
-
   }
 
   renderNavbar() {
@@ -23,75 +24,74 @@ export default class Navbar extends Component {
       return (
         <Menu>
           <Menu.Item
-          name="home"
-          active={activeItem === 'Home'}
-          onClick={this.handleItemClick}
-        >
-          <Link to="/">홈</Link>
-        </Menu.Item>
-
-        <Menu.Item
-          name="features"
-          active={activeItem === 'Features'}
-          onClick={this.handleItemClick}
-        >
-          <Link to="/features">기능</Link>
-        </Menu.Item>
-
-        <Menu.Item
-          name="pricing"
-          active={activeItem === 'Pricing'}
-          onClick={this.handleItemClick}
-        >
-          <Link to="/pricing">가격</Link>
-        </Menu.Item>
-
-        <Menu.Item
-          name="sign up"
-          active={activeItem === 'Sign Up'}
-          onClick={this.handleItemClick}
-        >
-          <Link to="/signup">회원가입</Link>
-        </Menu.Item>
-
-        <Menu.Item
-          name="sign in"
-          active={activeItem === 'Sign In'}
-          onClick={this.handleItemClick}
-        >
-          <Link to="/signin">로그인</Link>
-        </Menu.Item>
-        </Menu>
-    );
-  } else {
-    return (
-        <Menu>
-          <Menu.Item
             name="home"
-            active={activeItem === 'home'}
+            active={activeItem === 'Home'}
             onClick={this.handleItemClick}
           >
             <Link to="/">홈</Link>
           </Menu.Item>
 
           <Menu.Item
-            name="dashboard"
-            active={activeItem === 'dashboard'}
+            name="features"
+            active={activeItem === 'Features'}
             onClick={this.handleItemClick}
           >
-            <Link to="/dashboard">대쉬보드</Link>
+            <Link to="/features">기능</Link>
           </Menu.Item>
 
           <Menu.Item
-            name="sign out"
-            active={activeItem === 'sign out'}
+            name="pricing"
+            active={activeItem === 'Pricing'}
             onClick={this.handleItemClick}
           >
-            <Link to="/signout">로그아웃</Link>
+            <Link to="/pricing">가격</Link>
+          </Menu.Item>
+
+          <Menu.Item
+            name="sign up"
+            active={activeItem === 'Sign Up'}
+            onClick={this.handleItemClick}
+          >
+            <Link to="/signup">회원가입</Link>
+          </Menu.Item>
+
+          <Menu.Item
+            name="sign in"
+            active={activeItem === 'Sign In'}
+            onClick={this.handleItemClick}
+          >
+            <Link to="/signin">로그인</Link>
           </Menu.Item>
         </Menu>
       );
     }
+    return (
+      <Menu>
+        <Menu.Item
+          name="home"
+          active={activeItem === 'home'}
+          onClick={this.handleItemClick}
+        >
+          <Link to="/">홈</Link>
+        </Menu.Item>
+
+        <Menu.Item
+          name="dashboard"
+          active={activeItem === 'dashboard'}
+          onClick={this.handleItemClick}
+        >
+          <Link to="/dashboard">대쉬보드</Link>
+        </Menu.Item>
+
+        <Menu.Item
+          name="sign out"
+          active={activeItem === 'sign out'}
+          onClick={this.handleItemClick}
+        >
+          <Link to="/signout">로그아웃</Link>
+        </Menu.Item>
+      </Menu>
+    );
   }
 
   render() {
@@ -104,3 +104,11 @@ export default class Navbar extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated
+  };
+}
+
+export default connect(mapStateToProps)(Navbar);

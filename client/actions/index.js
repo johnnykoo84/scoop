@@ -1,18 +1,19 @@
 import axios from 'axios';
-import { BrowserRouter } from 'react-router-dom';
-const ROOT_URL = 'http://localhost:3001/api';
 import {
   AUTH_USER,
   UNAUTH_USER,
   AUTH_ERROR,
-  FETCH_MESSAGE
+  FETCH_MESSAGE,
 } from './types';
+
+const ROOT_URL = 'http://localhost:3001/api';
+
 
 export function signinUser({ email, password }, callback) {
   return function(dispatch) {
     // submit email/password to the server
     axios.post(`${ROOT_URL}/signin`, { email, password })
-      .then(response => {
+      .then((response) => {
         // if request is good...
         // - update state to indicate user is authenticated
         dispatch({ type: AUTH_USER });
@@ -32,7 +33,6 @@ export function signupUser({ email, password }, callback) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/signup`, { email, password })
       .then((response) => {
-        console.log('response', response)
         dispatch({ type: AUTH_USER });
 
         localStorage.setItem('token', response.data.token);
@@ -45,10 +45,18 @@ export function signupUser({ email, password }, callback) {
       //   dispatch(authError(response.data.error));
       // });
       .catch((error) => {
-        console.log('error?', error)
         dispatch(authError(error.response.data));
       });
   }
+}
+
+export function signoutUser(callback) {
+  console.log('localstorage in actions?', localStorage);
+  localStorage.removeItem('token');
+
+  callback();
+
+  return { type: UNAUTH_USER };
 }
 
 export function authError(error) {
@@ -59,11 +67,6 @@ export function authError(error) {
   };
 }
 
-export function signoutUser() {
-  localStorage.removeItem('token');
-
-  return { type: UNAUTH_USER };
-}
 
 // with redux-thunk
 export function fetchMessage() {

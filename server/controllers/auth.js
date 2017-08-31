@@ -6,24 +6,24 @@ function tokenForUser(user) {
   const timestamp = new Date().getTime();
   return jwt.encode({
     sub: user.id,
-    iat: timestamp
+    iat: timestamp,
   }, config.secret);
 }
-exports.signin = function(req, res, next) {
+
+exports.signin = (req, res, next) => {
   // user has already had their email and passport auth'd
   // we just need to give them a token
   res.send({ token: tokenForUser(req.user) });
-}
+};
 
-exports.signup = function(req, res, next) {
+exports.signup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   if (!email || !password) {
     return res.status(422).send({ error: 'You must provide email and pasword' });
   }
-  console.log('here')
   // see if a user with the given email exsit
-  User.findOne({ email: email }, function(err, existingUser) {
+  return User.findOne({ email }, (err, existingUser) => {
     if (err) { return next(err); }
 
     // if a user with email does exist, return an error
@@ -33,17 +33,15 @@ exports.signup = function(req, res, next) {
 
     // if a user with email does NOT exist, create and save user record
     const user = new User({
-      email: email,
-      password: password
+      email,
+      password,
     });
 
-    user.save(function(err) {
-      console.log('try save user')
+    return user.save((err) => {
       if (err) { return next(err); }
       // respond to request indicating the user was created
-      console.log('here we save a new user')
       res.json({ token: tokenForUser(user) });
       // res.json(user);
     });
   });
-}
+};
