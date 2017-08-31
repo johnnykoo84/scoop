@@ -4,10 +4,14 @@ import * as actions from '../../actions';
 
 class Signout extends Component {
   componentWillMount() {
-    this.props.signoutUser();
+    this.props.signoutUser(() => {
+      this.props.history.push('/');
+    });
   }
 
   render() {
+    console.log('signout clicked');
+
     return <div>Sorry to see you go...</div>;
   }
 }

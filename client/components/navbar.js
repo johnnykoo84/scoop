@@ -13,8 +13,8 @@ class Navbar extends Component {
   }
 
   handleItemClick(e, { name }) {
+    console.log('item clicked', name);
     this.setState({ activeItem: name });
-
   }
 
   renderNavbar() {

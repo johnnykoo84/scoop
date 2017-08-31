@@ -11,7 +11,6 @@ class SignUp extends Component {
     this.props.signupUser(values, () => {
       this.props.history.push('/features');
     });
-
   }
 
   renderAlert() {

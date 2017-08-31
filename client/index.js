@@ -10,6 +10,7 @@ import Landing from './components/landing';
 import Dashboard from './components/dashboard';
 import Signin from './components/auth/signin';
 import Signup from './components/auth/signup';
+import Signout from './components/auth/signout';
 import Pricing from './components/pricing';
 import Features from './components/features';
 
@@ -35,6 +36,7 @@ const Root = () => {
             <Route path="/dashboard" component={RequireAuth(Dashboard)} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
+            <Route path="/signout" component={Signout} />
             <Route path="/pricing" component={Pricing} />
             <Route path="/features" component={Features} />
             <Route path="/dashboard" component={Dashboard} />
