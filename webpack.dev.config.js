@@ -33,12 +33,12 @@ module.exports = {
     }
   },
 
-    plugins: [
-      new webpack.HotModuleReplacementPlugin(), // Enable HMR
-      new webpack.NoEmitOnErrorsPlugin(),
-      extractCSS,
-      new webpack.LoaderOptionsPlugin({ options: { postcss: [ autoprefixer ] } })
-    ],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(), // Enable HMR
+    new webpack.NoEmitOnErrorsPlugin(),
+    extractCSS,
+    new webpack.LoaderOptionsPlugin({ options: { postcss: [ autoprefixer ] } })
+  ],
 
   module: {
     rules: [

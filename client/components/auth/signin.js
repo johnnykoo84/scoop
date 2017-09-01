@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Container, Button, Form, Message } from 'semantic-ui-react';
 import * as actions from '../../actions';
 import FormField from '../../containers/formfield';
-import { validate } from '../utils/validate';
+import { validateSignin } from '../utils/validate';
 
 class Signin extends Component {
   handleFormValues(values) {
@@ -62,5 +62,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, actions)(reduxForm({
   form: 'signin',
-  validate,
+  validateSignin,
 })(Signin));
