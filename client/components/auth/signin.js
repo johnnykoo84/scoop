@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import * as actions from '../../actions';
 import { Container, Button, Form, Message } from 'semantic-ui-react';
+import * as actions from '../../actions';
 import FormField from '../../containers/formfield';
+import { validate } from '../utils/validate';
 
 class Signin extends Component {
   handleFormValues(values) {
@@ -14,21 +15,13 @@ class Signin extends Component {
     });
   }
 
-  // renderInput({ label, ...field }) {
-  //   return (
-  //     <fieldset className="form-group">
-  //       <label>{label}:</label>
-  //       <input type={field.input.name} {...field.input } className="form-control" />
-  //     </fieldset>
-  //   );
-  // }
-
   renderAlert() {
     if (this.props.errorMessage) {
       return (
-        <div className="alert alert-danger">
-          <strong>0ops!</strong> {this.props.errorMessage}
-        </div>
+        <Message negative>
+          <Message.Header>0ops!</Message.Header>
+          <p>{this.props.errorMessage}</p>
+        </Message>
       );
     }
   }
@@ -39,11 +32,11 @@ class Signin extends Component {
     return (
       <Container>
         <h1>로그인</h1>
-        <form onSubmit={handleSubmit(this.handleFormValues.bind(this))}>
+        <Form onSubmit={handleSubmit(this.handleFormValues.bind(this))}>
           <Field
             name="email"
             component={FormField}
-            label="Email 주소"
+            label="Email"
           />
           <br />
           <Field
@@ -56,16 +49,18 @@ class Signin extends Component {
           <Button primary type="submit">
             로그인
           </Button>
-        </form>
+        </Form>
       </Container>
     );
   }
 }
+
 
 function mapStateToProps(state) {
   return { errorMessage: state.auth.error };
 }
 
 export default connect(mapStateToProps, actions)(reduxForm({
-      form: 'signin'
-    })(Signin));
+  form: 'signin',
+  validate,
+})(Signin));
