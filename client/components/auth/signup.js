@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 import { Container, Button, Checkbox, Form, Modal, Input, Message} from 'semantic-ui-react';
 import FormField from '../../containers/formfield';
-import { validate } from '../utils/validate';
+import { validateSignup } from '../utils/validate';
 
 class SignUp extends Component {
   handleFormValues(values) {
@@ -78,5 +78,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, actions)(reduxForm({
   form: 'signup',
-  validate,
+  validateSignup,
 })(SignUp));
