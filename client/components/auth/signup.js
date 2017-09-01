@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 import { Container, Button, Checkbox, Form, Modal, Input, Message} from 'semantic-ui-react';
 import FormField from '../../containers/formfield';
+import { validate } from '../utils/validate';
 
 class SignUp extends Component {
   handleFormValues(values) {
@@ -61,6 +62,7 @@ class SignUp extends Component {
             placeholder="비밀번호를 다시 입력해 주세요"
           />
           {this.renderAlert()}
+          <br />
           <Button primary type="submit">
             회원 가입
           </Button>
@@ -70,35 +72,11 @@ class SignUp extends Component {
   }
 }
 
-function validate(formProps) {
-  const errors = {};
-
-  if (!formProps.email) {
-    errors.email = 'email주소를 입력해 주세요';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formProps.email)) {
-    errors.email = '잘못된 email 주소 형식입니다';
-  }
-
-  if (!formProps.password) {
-    errors.password = '비밀번호를 입력해 주세요';
-  }
-
-  if (!formProps.passwordConfirm) {
-    errors.passwordConfirm = '비밀번호를 재입력해 주세요';
-  }
-
-  if (formProps.password !== formProps.passwordConfirm) {
-    errors.password = '비밀번호가 일치하지 않습니다';
-  }
-
-  return errors;
-}
-
 function mapStateToProps(state) {
   return { errorMessage: state.auth.error };
 }
 
 export default connect(mapStateToProps, actions)(reduxForm({
   form: 'signup',
-  validate
+  validate,
 })(SignUp));
