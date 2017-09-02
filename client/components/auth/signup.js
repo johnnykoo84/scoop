@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { Container, Button, Form, Message } from 'semantic-ui-react';
 import * as actions from '../../actions';
-import { Container, Button, Checkbox, Form, Modal, Input, Message} from 'semantic-ui-react';
 import FormField from '../../containers/formfield';
 import { validateSignup } from '../utils/validate';
 
@@ -15,6 +15,7 @@ class SignUp extends Component {
   }
 
   renderAlert() {
+    console.log('this.props.errorMessage', this.props.errorMessage);
     if (this.props.errorMessage) {
       return (
         <Message negative>
@@ -73,10 +74,11 @@ class SignUp extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('state', state)
   return { errorMessage: state.auth.error };
 }
 
 export default connect(mapStateToProps, actions)(reduxForm({
   form: 'signup',
-  validateSignup,
+  validate: validateSignup,
 })(SignUp));

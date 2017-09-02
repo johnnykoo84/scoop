@@ -8,6 +8,7 @@ export default function FormField({
   as: As = Input,
   ...props
 }) {
+  console.log('props', props, 'touched', touched, 'error', error, 'label', label)
   return (
     <Form.Field>
       <As
@@ -18,7 +19,11 @@ export default function FormField({
         label={label}
         placeholder={placeholder}
       />
-      {touched && ((error && <Message negative><i>{error}</i></Message>)) || (warning && <Message negative><i>{warning}</i></Message>)}
+      {
+        touched
+        && ((error && <Message negative><i>{error}</i></Message>)
+        || (warning && <Message negative><i>{warning}</i></Message>))
+      }
     </Form.Field>
   );
 }
