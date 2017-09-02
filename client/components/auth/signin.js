@@ -32,17 +32,26 @@ class Signin extends Component {
     return (
       <Container>
         <h1>로그인</h1>
-        <Form onSubmit={handleSubmit(this.handleFormValues.bind(this))}>
+        <Form
+          name="signinForm"
+          onSubmit={handleSubmit(this.handleFormValues.bind(this))}
+        >
           <Field
             name="email"
             component={FormField}
-            label="Email"
+            as={Form.Input}
+            type="email"
+            label="Email 주소"
+            placeholder="email 주소를 입력해 주세요"
           />
           <br />
           <Field
             name="password"
             component={FormField}
+            as={Form.Input}
+            type="password"
             label="비밀번호"
+            placeholder="비밀번호를 입력해 주세요"
           />
           {this.renderAlert()}
           <br />
@@ -62,5 +71,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, actions)(reduxForm({
   form: 'signin',
-  validateSignin,
+  validate: validateSignin,
 })(Signin));

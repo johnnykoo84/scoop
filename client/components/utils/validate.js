@@ -35,13 +35,5 @@ export const validateSignin = (formProps) => {
     errors.password = '비밀번호를 입력해 주세요';
   }
 
-  if (!formProps.passwordConfirm) {
-    errors.passwordConfirm = '비밀번호를 재입력해 주세요';
-  }
-
-  if (formProps.password !== formProps.passwordConfirm) {
-    errors.password = '비밀번호가 일치하지 않습니다';
-  }
-
   return errors;
 }
