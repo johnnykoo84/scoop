@@ -36,6 +36,12 @@ class Signin extends Component {
           name="signinForm"
           onSubmit={handleSubmit(this.handleFormValues.bind(this))}
         >
+          <Form.Input fluid icon="user" iconPosition="left"
+            component={FormField}
+            as="Form.Input"
+            type="email"
+            label="Email Addreses"
+          />
           <Field
             name="email"
             component={FormField}

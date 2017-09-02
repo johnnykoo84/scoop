@@ -14,6 +14,7 @@ import Signout from './components/auth/signout';
 import Pricing from './components/pricing';
 import Features from './components/features';
 import Navbar from './components/navbar';
+import LoginFormExample from './examples/loginformexample';
 
 import RequireAuth from './components/auth/require_auth';
 import reducers from './reducers';
@@ -48,6 +49,7 @@ const Root = () => {
             <Route path="/pricing" component={Pricing} />
             <Route path="/features" component={Features} />
             <Route path="/dashboard" component={Dashboard} />
+            <Route path="/loginexample" component={LoginFormExample} />
             <Route exact path="/" component={Landing} />
           </Switch>
         </div>
