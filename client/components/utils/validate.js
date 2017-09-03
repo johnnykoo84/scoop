@@ -7,6 +7,10 @@ export const validateSignup = (formProps) => {
     errors.email = '잘못된 email 주소 형식입니다';
   }
 
+  if (!formProps.company) {
+    errors.company = '회사 이름을 입력해 주세요';
+  }
+
   if (!formProps.password) {
     errors.password = '비밀번호를 입력해 주세요';
   }

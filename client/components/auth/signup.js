@@ -10,17 +10,17 @@ class SignUp extends Component {
   handleFormValues(values) {
     // need to do something to log user in
     this.props.signupUser(values, () => {
-      this.props.history.push('/features');
+      this.props.history.push('/');
     });
   }
 
   renderAlert() {
-    console.log('this.props.errorMessage', this.props.errorMessage);
     if (this.props.errorMessage) {
+      console.log('this.props.errorMessage', this.props.errorMessage);
       return (
         <Message negative>
           <Message.Header>Oops!</Message.Header>
-          <p>{this.props.errorMessage}</p>;
+          <p>{this.props.errorMessage.error}</p>
         </Message>
       );
     }
@@ -45,6 +45,14 @@ class SignUp extends Component {
             type="email"
             label="Email 주소"
             placeholder="email 주소를 입력해 주세요"
+          />
+          <Field
+            name="company"
+            component={FormField}
+            as={Form.Input}
+            type="text"
+            label="회사명"
+            placeholder="회사 이름을 입력해 주세요"
           />
           <Field
             name="password"
@@ -74,7 +82,6 @@ class SignUp extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state', state)
   return { errorMessage: state.auth.error };
 }
 

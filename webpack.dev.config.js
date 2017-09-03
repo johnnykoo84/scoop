@@ -10,7 +10,8 @@ module.exports = {
   entry: [
     path.resolve('./client/index.js'),
     'webpack-dev-server/client?http://0.0.0.0:3001',
-    'webpack/hot/only-dev-server'
+    'webpack/hot/only-dev-server',
+    "./client"
   ],
 
   output: {
