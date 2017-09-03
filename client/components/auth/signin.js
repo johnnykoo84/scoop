@@ -11,7 +11,7 @@ class Signin extends Component {
     // console.log(values);
     // need to do something to log user in
     this.props.signinUser(values, () => {
-      this.props.history.push('/features');
+      this.props.history.push('/');
     });
   }
 
@@ -36,12 +36,6 @@ class Signin extends Component {
           name="signinForm"
           onSubmit={handleSubmit(this.handleFormValues.bind(this))}
         >
-          <Form.Input fluid icon="user" iconPosition="left"
-            component={FormField}
-            as="Form.Input"
-            type="email"
-            label="Email Addreses"
-          />
           <Field
             name="email"
             component={FormField}

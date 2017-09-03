@@ -8,7 +8,6 @@ export default function FormField({
   as: As = Input,
   ...props
 }) {
-  console.log('props', props, 'touched', touched, 'error', error, 'label', label)
   return (
     <Form.Field>
       <As

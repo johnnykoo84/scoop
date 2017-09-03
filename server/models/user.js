@@ -10,13 +10,21 @@ const UserSchema = new Schema({
     lowercase: true,
     unique: true,
     required: true,
+    trim: true,
   },
   password: {
     type: String,
     required: true,
+    trim: true,
+  },
+  company: {
+    type: String,
+    lowercase: true,
+    required: true,
+    trim: true,
   },
   admin: {
-    type: Boolean,
+    type: Boolean, // admin user true, staff user false
     default: false,
   },
 });
@@ -57,10 +65,12 @@ UserSchema.methods.comparePassword = function comparePassword(candidatePassword,
 };
 
 // create new UserSchema document
-UserSchema.statics.create = function (email, password) {
+UserSchema.statics.create = (email, company, password) => {
+  console.log('email', email, 'company', company)
   const user = new this({
     email,
-    password
+    company,
+    password,
   });
 
   // return the Promise
@@ -84,6 +94,7 @@ UserSchema.methods.verify = function (password) {
   return this.password = password
 };
 
+// assign user as adimn user
 UserSchema.methods.assignAdmin = function () {
   this.admin = true;
   return this.save();

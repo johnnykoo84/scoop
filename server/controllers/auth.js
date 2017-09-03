@@ -17,10 +17,11 @@ exports.signin = (req, res, next) => {
 };
 
 exports.signup = (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  if (!email || !password) {
-    return res.status(422).send({ error: 'You must provide email and pasword' });
+  // const email = req.body.email;
+  // const password = req.body.password;
+  const { email, company, password } = req.body;
+  if (!email || !company || !password) {
+    return res.status(422).send({ error: 'email 주소와 비밀번호를 입력해 주세요' });
   }
   // see if a user with the given email exsit
   return User.findOne({ email }, (err, existingUser) => {
@@ -28,20 +29,30 @@ exports.signup = (req, res, next) => {
 
     // if a user with email does exist, return an error
     if (existingUser) {
-      return res.status(422).send({ error: 'Email is in use' });
+      return res.status(422).send({ error: '해당 email 주소는 이미 사용 중입니다' });
     }
 
-    // if a user with email does NOT exist, create and save user record
-    const user = new User({
-      email,
-      password,
-    });
-
-    return user.save((err) => {
+    return User.findOne({ company }, (err, existingCompany) => {
       if (err) { return next(err); }
-      // respond to request indicating the user was created
-      res.json({ token: tokenForUser(user) });
-      // res.json(user);
+
+      if (existingCompany) {
+        return res.status(422).send({ error: '해당 회사 이름이 이미 사용 중입니다' });
+      }
+
+      // if a user with email&company do NOT exist, create and save user record
+      const user = new User({
+        email,
+        company,
+        password,
+        admin: true,
+      });
+
+      return user.save((err) => {
+        if (err) { return next(err); }
+        // respond to request indicating the user was created
+        res.json({ token: tokenForUser(user) });
+        // res.json(user);
+      });
     });
   });
 };
