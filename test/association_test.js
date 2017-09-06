@@ -1,5 +1,7 @@
 const Company = require('../server/models/company');
 const User = require('../server/models/user');
+const expect = require('chai').expect;
+const assert = require('assert');
 
 describe('associations test b/w company and user', () => {
   let peach, snu, ps;
@@ -16,7 +18,6 @@ describe('associations test b/w company and user', () => {
     peach.spaces.push(snu); // this is a simple object pushed to array
     peach.users.push(ps); // here mongoose automatically only pushs object id
     ps.companyId = peach; // again here mongoose intercepts somehow and just saves object id
-
     Promise.all([peach.save(), ps.save()])
       .then(() => done());
   });
@@ -26,22 +27,26 @@ describe('associations test b/w company and user', () => {
       .findOne({ name: 'peach' })
       .populate('users')
       .then((company) => {
-        console.log('company', company);
+        console.log(company);
+        expect(company.users[0].companyId.toString()).to.equal(peach._id.toString());
         done();
       });
+  });
 
-    // old code
-    // User.findOne({ email: 'ps@email.com' })
-    //   .then((user) => {
-    //     console.log('user found', user);
-    //     return user;
-    //   })
-    //   .then((user) => {
-    //     Company.findOne({ _id: user.companyId })
-    //       .then((company) => {
-    //         console.log('company found', company);
-    //         done();
-    //       });
-    //   });
+  it.only('double populate', (done) => {
+    Company
+      .findOne({ name: 'peach' })
+      .populate({
+        path: 'users',
+        populate: {
+          path: 'companyId',
+          model: 'Company'
+        }
+      })
+      .then((company) => {
+        // console.log(company.users[0].companyId.users[0].toString());
+        expect(company.users[0].companyId.users[0].toString()).to.equal(ps._id.toString());
+        done();
+      });
   });
 });
