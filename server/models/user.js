@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
 const Schema = mongoose.Schema;
-const Company = require('./company');
-const ObjectId = Schema.ObjectId;
 const saltRounds = 10;
 
 const UserSchema = new Schema({
@@ -20,8 +18,8 @@ const UserSchema = new Schema({
     required: true,
   },
   companyId: {
-    type: ObjectId,
-    required: true,
+    type: Schema.Types.ObjectId,
+    ref: 'Company',
   },
   admin: {
     type: Boolean, // admin user true, staff user false

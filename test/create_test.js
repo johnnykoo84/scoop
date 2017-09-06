@@ -1,7 +1,7 @@
 const assert = require('assert');
 const Company = require('../server/models/company');
 
-describe('create test', () => {
+xdescribe('create test', () => {
 
   it('saves a company', (done) => {
     const peach = new Company({
@@ -10,7 +10,6 @@ describe('create test', () => {
 
     peach.save()
       .then(() => {
-        console.log('save save save')
         assert(!peach.isNew);
         done();
       });

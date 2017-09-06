@@ -1,8 +1,7 @@
-const assert = require('assert');
 const expect = require('chai').expect;
 const Company = require('../server/models/company');
 
-describe('query company', () => {
+xdescribe('query company', () => {
   let peach;
 
   beforeEach((done) => {
@@ -18,8 +17,15 @@ describe('query company', () => {
       .then((companies) => {
         expect(companies[0]._id.toString()).to.equal(peach._id.toString());
         done();
-      })
-      .catch(err => done(err));
+      });
   });
 
+  it('model instance remove method', (done) => {
+    peach.remove()
+      .then(() => Company.findOne({ name: 'peach' }))
+      .then((company) => {
+        expect(company).to.equal(null);
+        done();
+      });
+  });
 });

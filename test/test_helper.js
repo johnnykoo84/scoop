@@ -15,12 +15,21 @@ before((done) => {
 });
 
 beforeEach((done) => {
-  mongoose.connection.collections.companies.drop(() => {
-    // ready to go to next test!!
-    done();
+  const { companies, users } = mongoose.connection.collections;
+  companies.drop(() => {
+    users.drop(() => {
+      done();
+    });
   });
 });
 
+// wait for node version update to higher than v7
+// const Company = require('../server/models/company');
+// beforeAll(async () => {
+//   await Company.remove({})
+// });
+
+// I don't know if below code is correct
 // afterEach((done) => {
 //   mongoose.connection.collections.companies.drop(() => {
 //     // ready to go to next test!!
