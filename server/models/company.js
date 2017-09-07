@@ -18,4 +18,16 @@ const Company = new Schema({
   }],
 });
 
+Company.pre('remove', function(next) {
+  const User = mongoose.model('User');
+  User.remove({ _id: { $in: this.users }})
+    .then(() => {
+      User.find({})
+        .then((users) => {
+          next();
+        })
+    })
+    .then(() => next());
+});
+
 module.exports = mongoose.model('Company', Company);
