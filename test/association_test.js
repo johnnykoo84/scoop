@@ -27,13 +27,13 @@ describe('associations test b/w company and user', () => {
       .findOne({ name: 'peach' })
       .populate('users')
       .then((company) => {
-        console.log(company);
+        // console.log(company);
         expect(company.users[0].companyId.toString()).to.equal(peach._id.toString());
         done();
       });
   });
 
-  it.only('double populate', (done) => {
+  it('double populate', (done) => {
     Company
       .findOne({ name: 'peach' })
       .populate({
