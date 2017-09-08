@@ -11,96 +11,44 @@ function tokenForUser(user) {
   }, config.secret);
 }
 
+exports.signup = (req, res, next) => {
+  const { company, email, password } = req.body;
+  console.log('req.body', req.body);
+  console.log('company', company, 'email', email, 'password', password)
+  if (!email || !company || !password) {
+    return res.status(422).send({ error: 'email 주소, 비밀번호, 회사 이름을 입력해 주세요' });
+  }
+  const existingUserCheck = User.findOne({ email });
+  const existingCompanyCheck = Company.findOne({ name: company });
+
+  Promise.all([existingUserCheck, existingCompanyCheck])
+    .then((result) => {
+      if (result[0]) {
+        return res.status(422).send({ error: '해당 email 주소는 이미 사용 중입니다.' });
+      }
+      if (result[1]) {
+        return res.status(422).send({ error: '이미 가입되어 있는 회사 이름 입니다. 다른 회사 이름으로 시도하시거나 먼저 등록한 사용자에게 연락해 주세요' });
+      }
+
+      const newCompany = new Company({
+        name: company,
+      });
+      const newUser = new User({
+        email,
+        password,
+        admin: true,
+      });
+      Promise.all([newCompany.save(), newUser.save()])
+        .then(() => {
+          res.json({ token: tokenForUser(newUser) });
+        });
+    })
+    .catch(err => res.json(err));
+};
+
 // for signin
 exports.signin = (req, res, next) => {
   // user has already had their email and passport auth'd
   // we just need to give them a token
   res.send({ token: tokenForUser(req.user) });
 };
-
-exports.signup = (req, res, next) => {
-  const { email, company, password } = req.body;
-  console.log('req.body', req.body)
-  if (!email || !company || !password) {
-    return res.status(422).send({ error: 'email 주소, 비밀번호, 회사 이름을 입력해 주세요' });
-  }
-
-  User.findOne({ email })
-    .then((err, user) => {
-      if (err) { console.log('error during user findone');return next(err); }
-      console.log('user found', user);
-      if (user) {
-        return res.status(422).send({ error: '해당 email 주소는 이미 사용 중입니다.' });
-      }
-    });
-
-  Company.findOne({ name: company })
-    .then((err, company) => {
-      if (err) { console.log('error during cmpany findone');return next(err); }
-      console.log('company found', company);
-      if (company) {
-        return res.status(422).send({ error: '이미 가입되어 있는 회사 이름 입니다. 다른 회사 이름으로 시도하시거나 먼저 등록한 사용자에게 연락해 주세요' });
-      }
-    });
-
-  const newCompany = new Company({
-    name: company,
-  });
-  const newUser = new User({
-    email,
-    password,
-    admin: true,
-  });
-
-  newCompany.save()
-    .then((err) => {
-      if (err) { console.log('error during company.save');return next(err); }
-      newUser.save()
-        .then((err) => {
-          if (err) { console.log('error during user.save');return next(err); }
-          res.json({ token: tokenForUser(newUser) });
-        });
-    });
-};
-
-// // for signup
-// exports.signup = (req, res, next) => {
-//   // const email = req.body.email;
-//   // const password = req.body.password;
-//   const { email, company, password } = req.body;
-//   if (!email || !company || !password) {
-//     return res.status(422).send({ error: 'email 주소와 비밀번호를 입력해 주세요' });
-//   }
-//   // see if a user with the given email exsit
-//   return User.findOne({ email }, (err, existingUser) => {
-//     if (err) { return next(err); }
-//
-//     // if a user with email does exist, return an error
-//     if (existingUser) {
-//       return res.status(422).send({ error: '해당 email 주소는 이미 사용 중입니다' });
-//     }
-//
-//     return User.findOne({ company }, (err, existingCompany) => {
-//       if (err) { return next(err); }
-//
-//       if (existingCompany) {
-//         return res.status(422).send({ error: '해당 회사 이름이 이미 사용 중입니다' });
-//       }
-//
-//       // if a user with email&company do NOT exist, create and save user record
-//       const user = new User({
-//         email,
-//         company,
-//         password,
-//         admin: true,
-//       });
-//
-//       return user.save((err) => {
-//         if (err) { return next(err); }
-//         // respond to request indicating the user was created
-//         res.json({ token: tokenForUser(user) });
-//         // res.json(user);
-//       });
-//     });
-//   });
-// };

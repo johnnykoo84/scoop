@@ -17,15 +17,9 @@ const Company = new Schema({
   }],
 });
 
-Company.pre('remove', function(next) {
+Company.pre('remove', (next) => {
   const User = mongoose.model('User');
-  User.remove({ _id: { $in: this.users }})
-    // .then(() => {
-    //   User.find({})
-    //     .then((users) => {
-    //       next();
-    //     })
-    // })
+  User.remove({ _id: { $in: this.users } })
     .then(() => next());
 });
 
