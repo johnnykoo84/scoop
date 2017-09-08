@@ -29,9 +29,9 @@ export function signinUser({ email, password }, callback) {
       });
   };
 }
-export function signupUser({ email, company, password }, callback) {
+export function signupUser({ company, email, password }, callback) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/signup`, { email, company, password })
+    axios.post(`${ROOT_URL}/signup`, { company, email, password })
       .then((response) => {
         dispatch({ type: AUTH_USER });
 
