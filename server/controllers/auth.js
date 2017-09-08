@@ -8,6 +8,7 @@ function tokenForUser(user) {
   return jwt.encode({
     sub: user.id,
     iat: timestamp,
+    companyId: user.companyId,
   }, config.secret);
 }
 
@@ -38,6 +39,8 @@ exports.signup = (req, res, next) => {
         password,
         admin: true,
       });
+      newUser.companyId = newCompany;
+
       Promise.all([newCompany.save(), newUser.save()])
         .then(() => {
           res.json({ token: tokenForUser(newUser) });
@@ -48,6 +51,7 @@ exports.signup = (req, res, next) => {
 
 // for signin
 exports.signin = (req, res, next) => {
+  // console.log('req.header', req.header, 'req.headers', req.headers)
   // user has already had their email and passport auth'd
   // we just need to give them a token
   res.send({ token: tokenForUser(req.user) });

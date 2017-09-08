@@ -7,16 +7,17 @@ const LocalStrategy = require('passport-local');
 
 // create local Strategy
 const localOptions = { usernameField: 'email' };
-const localLogin = new LocalStrategy(localOptions, function(email, password, done) {
+const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
+  console.log('email', email, 'password', password)
   // verify this email and password, call done with the user
   // if it is the correct email and password
   // otherwise, call done with false
-  User.findOne({ email: email }, function(err, user) {
+  User.findOne({ email: email }, (err, user) => {
     if (err) { return done(err); }
     if (!user) { return done(null, false); }
 
     // compare passwords - is 'password' equl to user.password?
-    user.comparePassword(password, function(err, isMatch) {
+    user.comparePassword(password, (err, isMatch) => {
       if (err) { return done(err); }
       if (!isMatch) { return done(null, false); }
       console.log('sigin successful');

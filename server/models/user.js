@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Company',
   },
-  admin: {
+  isAdmin: {
     type: Boolean, // admin user true, staff user false
     default: false,
     required: true,
@@ -70,7 +70,7 @@ UserSchema.methods.comparePassword = function comparePassword(candidatePassword,
 };
 
 // create new UserSchema document
-UserSchema.statics.create = (email, company, password) => {
+UserSchema.statics.create = function create(email, company, password) {
   const user = new this({
     email,
     company,
@@ -82,25 +82,25 @@ UserSchema.statics.create = (email, company, password) => {
 };
 
 // find all users
-UserSchema.statics.findAll = function () {
+UserSchema.statics.findAll = function findAll() {
   return this.find({}).exec();
-}
+};
 
 // find one user by using username
-UserSchema.statics.findOneByEmail = function (email) {
+UserSchema.statics.findOneByEmail = function findOneByEmail(email) {
   return this.findOne({
     email
   }).exec();
 };
 
 // verify the password of the User document
-UserSchema.methods.verify = function (password) {
+UserSchema.methods.verify = function verify(password) {
   return this.password = password
 };
 
 // assign user as adimn user
-UserSchema.methods.assignAdmin = function () {
-  this.admin = true;
+UserSchema.methods.assignAdmin = function assignAdmin() {
+  this.isAdmin = true;
   return this.save();
 };
 
