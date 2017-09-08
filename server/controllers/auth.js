@@ -18,41 +18,30 @@ exports.signup = (req, res, next) => {
   if (!email || !company || !password) {
     return res.status(422).send({ error: 'email 주소, 비밀번호, 회사 이름을 입력해 주세요' });
   }
+  const existingUserCheck = User.findOne({ email });
+  const existingCompanyCheck = Company.findOne({ name: company });
 
-  User.findOne({ email })
-    .then((user) => {
-      console.log('user found', user);
-      if (user) {
+  Promise.all([existingUserCheck, existingCompanyCheck])
+    .then((result) => {
+      if (result[0]) {
         return res.status(422).send({ error: '해당 email 주소는 이미 사용 중입니다.' });
       }
-    })
-    .then(() => {
-      Company.findOne({ name: company })
-        .then((company) => {
-          console.log('company found', company);
-          if (company) {
-            return res.status(422).send({ error: '이미 가입되어 있는 회사 이름 입니다. 다른 회사 이름으로 시도하시거나 먼저 등록한 사용자에게 연락해 주세요' });
-          }
-        });
-    })
-    .then(() => {
+      if (result[1]) {
+        return res.status(422).send({ error: '이미 가입되어 있는 회사 이름 입니다. 다른 회사 이름으로 시도하시거나 먼저 등록한 사용자에게 연락해 주세요' });
+      }
+
       const newCompany = new Company({
         name: company,
       });
-
-      return newCompany.save();
-    })
-    .then(() => {
       const newUser = new User({
         email,
         password,
         admin: true,
       });
-
-      return newUser.save();
-    })
-    .then((newUser) => {
-      res.json({ token: tokenForUser(newUser) });
+      Promise.all([newCompany.save(), newUser.save()])
+        .then(() => {
+          res.json({ token: tokenForUser(newUser) });
+        });
     })
     .catch(err => res.json(err));
 };
