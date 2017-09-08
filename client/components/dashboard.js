@@ -6,7 +6,6 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Navbar />
         This is a Dashboard page
       </div>
     )

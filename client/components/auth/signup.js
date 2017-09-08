@@ -16,7 +16,6 @@ class SignUp extends Component {
 
   renderAlert() {
     if (this.props.errorMessage) {
-      console.log('this.props.errorMessage', this.props.errorMessage);
       return (
         <Message negative>
           <Message.Header>Oops!</Message.Header>
