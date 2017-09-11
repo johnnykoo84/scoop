@@ -1,15 +1,13 @@
 const Company = require('../models/company');
-const ExtractJwt = require('passport-jwt').ExtractJwt;
+const SECRET = require('../../config').secret;
+const jwt = require('jwt-simple');
 
 module.exports = {
   get:
     (req, res) => {
-      const jwtFromReq = ExtractJwt.fromHeader('authorization');
-
-      // console.log('jwt!!', jwtFromReq(req.headers.authorization));
-
-      console.log('req.query.companyId', req.query.companyId)
-      const companyId = req.query;
+      const token = req.headers.authorization;
+      const decoded = jwt.decode(token, SECRET);
+      const companyId = decoded.companyId;
       Company.getAllSpaces(companyId)
         .then((result) => {
           res.json(result);
@@ -21,7 +19,11 @@ module.exports = {
 
   post:
     (req, res) => {
-      const { companyId, spaceName } = req.body;
+      const token = req.headers.authorization;
+      const decoded = jwt.decode(token, SECRET);
+      const companyId = decoded.companyId;
+      const { spaceName } = req.body;
+
       Company.addSpace(companyId, spaceName)
         .then((result) => {
           res.json(result);
