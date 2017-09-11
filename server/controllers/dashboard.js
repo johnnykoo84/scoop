@@ -6,11 +6,9 @@ module.exports = {
   get:
     (req, res) => {
       console.log('here we are at DASHBOARD!!!!!!')
-      // console.log('req.headers?', req.headers)
       const token = req.headers.authorization;
       const decoded = jwt.decode(token, SECRET);
       const companyId = decoded.companyId;
-      // console.log('companyId', companyId)
       const getAllSpaces = Company.getAllSpaces(companyId);
 
       Promise.all([getAllSpaces])
