@@ -8,7 +8,7 @@ function tokenForUser(user) {
   return jwt.encode({
     sub: user.id,
     iat: timestamp,
-    companyId: user.companyId,
+    companyId: user.companyId._id,
   }, config.secret);
 }
 
@@ -43,6 +43,7 @@ exports.signup = (req, res, next) => {
 
       Promise.all([newCompany.save(), newUser.save()])
         .then(() => {
+          console.log('new company and new user saved alright')
           res.json({ token: tokenForUser(newUser) });
         });
     })
