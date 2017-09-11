@@ -6,7 +6,7 @@ module.exports = {
     (req, res) => {
       const jwtFromReq = ExtractJwt.fromHeader('authorization');
 
-      console.log('jwt!!', jwtFromReq(req.headers));
+      // console.log('jwt!!', jwtFromReq(req.headers.authorization));
 
       console.log('req.query.companyId', req.query.companyId)
       const companyId = req.query;

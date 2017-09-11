@@ -38,10 +38,9 @@ Company.statics.findOneByName = function findOneByName(name) {
 };
 
 Company.statics.getAllSpaces = function getAllSpaces(companyId) {
-  return this.find({ name: companyId })
-    .populate({ path: 'spaces'})
+  return this.findById(companyId)
+    .populate({ path: 'spaces' })
     .then((result) => {
-      console.log('result', result);
       return result;
     })
     .catch(err => Promise.reject(err));
