@@ -53,6 +53,7 @@ mongoose.connection
   .on('error', error => console.log('Error connecting to MongoLab:', error));
 // const mongoClient = require('mongodb').MongoClient;
 
+// what is this???????
 app.use('/', express.static(__dirname + '/../public'));
 
 // parse JSON and url-encoded query
@@ -78,11 +79,11 @@ app.use(passport.initialize());
 // configure api router
 app.use('/api', require('./routes/'));
 
-app.use((req, res, next) => {
-  const err = new Error('Not Found API!!!');
-  err.status = 404;
-  next(err);
-});
+// app.use((req, res, next) => {
+//   const err = new Error('Not Found API');
+//   err.status = 404;
+//   next(err);
+// });
 
 // open the server
 const server = app.listen(port, () => {

@@ -16,7 +16,6 @@ class SignUp extends Component {
 
   renderAlert() {
     if (this.props.errorMessage) {
-      console.log('this.props.errorMessage', this.props.errorMessage);
       return (
         <Message negative>
           <Message.Header>Oops!</Message.Header>
@@ -39,20 +38,20 @@ class SignUp extends Component {
           onSubmit={handleSubmit(this.handleFormValues.bind(this))}
         >
           <Field
-            name="email"
-            component={FormField}
-            as={Form.Input}
-            type="email"
-            label="Email 주소"
-            placeholder="email 주소를 입력해 주세요"
-          />
-          <Field
             name="company"
             component={FormField}
             as={Form.Input}
             type="text"
             label="회사명"
             placeholder="회사 이름을 입력해 주세요"
+          />
+          <Field
+            name="email"
+            component={FormField}
+            as={Form.Input}
+            type="email"
+            label="Email 주소"
+            placeholder="email 주소를 입력해 주세요"
           />
           <Field
             name="password"
