@@ -13,8 +13,8 @@ import Signup from './components/auth/signup';
 import Signout from './components/auth/signout';
 import Pricing from './components/pricing';
 import Features from './components/features';
-import Navbar from './components/navbar';
 import LoginFormExample from './examples/loginformexample';
+import SidebarLeft from './examples/sidebar';
 
 import RequireAuth from './components/auth/require_auth';
 import reducers from './reducers';
@@ -40,7 +40,6 @@ const Root = () => {
     <Provider store={store}>
       <HashRouter>
         <div>
-          <Navbar />
           <Switch>
             <Route path="/dashboard" component={RequireAuth(Dashboard)} />
             <Route path="/signin" component={Signin} />
@@ -50,6 +49,7 @@ const Root = () => {
             <Route path="/features" component={Features} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/loginexample" component={LoginFormExample} />
+            <Route path="/sidebar" component={SidebarLeft} />
             <Route exact path="/" component={Landing} />
           </Switch>
         </div>

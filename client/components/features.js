@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import Navbar from './navbar';
 
 class Features extends Component {
   componentWillMount() {
@@ -10,6 +11,7 @@ class Features extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <h1>This is Features page!!@@@</h1>
         <p>{this.props.message}</p>
       </div>

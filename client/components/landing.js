@@ -6,6 +6,7 @@ class Landing extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <h1>This is a landing page@@</h1>
       </div>
     )
