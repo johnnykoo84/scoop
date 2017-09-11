@@ -101,7 +101,6 @@ export function fetchDashboardInfo() {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then((response) => {
-        console.log('axios result', response);
         dispatch({
           type: FETCH_DASHBOARD,
           payload: response.data,
