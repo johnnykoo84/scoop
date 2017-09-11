@@ -4,6 +4,7 @@ import {
   UNAUTH_USER,
   AUTH_ERROR,
   FETCH_MESSAGE,
+  FETCH_DASHBOARD
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001/api';
@@ -93,3 +94,18 @@ export function fetchMessage() {
 //     payload: request
 //   }
 // }
+
+export function fetchDashboardInfo() {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/dashboard`, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
+      .then((response) => {
+        console.log('axios result', response);
+        dispatch({
+          type: FETCH_DASHBOARD,
+          payload: response.data,
+        });
+      });
+  };
+}
