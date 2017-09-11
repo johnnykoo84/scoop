@@ -26,8 +26,7 @@ class Dashboard extends Component {
 
     return (
       <div>
-        This is a Dashboard page
-        <h2>{this.props.dashboardInfo.name}</h2>
+        <h2>{this.props.dashboardInfo.name} 관리자 페이지 입니다</h2>
         <br />
         <List selection verticalAlign="middle">
           {this.renderSpaceList()}
