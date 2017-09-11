@@ -1,33 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { List } from 'semantic-ui-react';
 import * as actions from '../actions';
-// import { Button } from 'semantic-ui-react';
 
 class Dashboard extends Component {
   componentWillMount() {
     this.props.fetchDashboardInfo();
   }
 
-  renderDashboardInfo() {
-    console.log('this.props', this.props);
-    return this.props.dashboardInfo.spaces.map(space => <li>{space.name}</li>);
+  renderSpaceList() {
+    return this.props.dashboardInfo.spaces.map((space) =>
+    <List.Item>
+      <List.Header>
+        {space.name}
+      </List.Header>
+    </List.Item>
+    );
   }
 
   render() {
-    console.log('this.props.dashboardInfo', this.props.dashboardInfo);
+    // console.log('this.props', this.props);
+    if (!this.props.dashboardInfo) {
+      return <div>Loading...</div>
+    }
+
     return (
       <div>
-        This is a Dashboard page
-        <ul>
-          {this.renderDashboardInfo()}
-        </ul>
+        <h2>{this.props.dashboardInfo.name} 관리자 페이지 입니다</h2>
+        <br />
+        <List selection verticalAlign="middle">
+          {this.renderSpaceList()}
+        </List>
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  console.log('state.dashboard.info', state.dashboard.info)
   return {
     dashboardInfo: state.dashboard.info,
   };
