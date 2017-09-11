@@ -4,11 +4,12 @@ const Company = require('../models/company');
 const config = require('../../config');
 
 function tokenForUser(user) {
+  console.log('user token generator called, user', user)
   const timestamp = new Date().getTime();
   return jwt.encode({
     sub: user.id,
     iat: timestamp,
-    companyId: user.companyId._id,
+    companyId: user.companyId,
   }, config.secret);
 }
 

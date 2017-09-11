@@ -21,7 +21,7 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
     user.comparePassword(password, (err, isMatch) => {
       if (err) { return done(err); }
       if (!isMatch) { return done(null, false); }
-      console.log('sigin successful');
+      console.log('sigin successful, user:', user);
       return done(null, user);
     });
   });
