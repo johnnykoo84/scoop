@@ -7,7 +7,7 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { activeItem: 'Home' };
+    this.state = { activeItem: '' };
     this.handleItemClick = this.handleItemClick.bind(this);
     this.renderNavbar = this.renderNavbar.bind(this);
   }
@@ -19,57 +19,51 @@ class Navbar extends Component {
 
   renderNavbar() {
     const { activeItem } = this.state
-
+    console.log('activeIOtem', activeItem)
     if (!this.props.authenticated) {
       return (
-        <Segment inverted>
-        <Menu inverted pointing secondary>
+        <Menu inverted borderless color="yellow" width={5}>
           <Menu.Item
             name="home"
-            active={activeItem === 'Home'}
+            active={activeItem === 'home'}
             onClick={this.handleItemClick}
           >
-            <Link to="/">scoop</Link>
+            <Link to="/"><h1>scoop</h1></Link>
           </Menu.Item>
 
-          <Menu.Item
-            name="features"
-            active={activeItem === 'Features'}
-            onClick={this.handleItemClick}
-          >
-            <Link to="/features">기능</Link>
-          </Menu.Item>
-
-          <Menu.Item
-            name="pricing"
-            active={activeItem === 'Pricing'}
-            onClick={this.handleItemClick}
-          >
-            <Link to="/pricing">가격</Link>
-          </Menu.Item>
           <Menu.Menu position="right">
-          <Menu.Item
-            name="sign up"
-            active={activeItem === 'Sign Up'}
-            onClick={this.handleItemClick}
-          >
-            <Button primary>
-              <Link to="/signup">회원가입</Link>
-            </Button>
-          </Menu.Item>
+            <Menu.Item
+              name="features"
+              active={activeItem === 'features'}
+              onClick={this.handleItemClick}
+            >
+              <Link to="/features"><h3>기능</h3></Link>
+            </Menu.Item>
 
-          <Menu.Item
-            name="sign in"
-            active={activeItem === 'Sign In'}
-            onClick={this.handleItemClick}
-          >
-            <Button>
-              <Link to="/signin">로그인</Link>
-            </Button>
-          </Menu.Item>
-        </Menu.Menu>
+            <Menu.Item
+              name="pricing"
+              active={activeItem === 'pricing'}
+              onClick={this.handleItemClick}
+            >
+              <Link to="/pricing"><h3>가격</h3></Link>
+            </Menu.Item>
+            <Menu.Item
+              name="sign up"
+              active={activeItem === 'sign Up'}
+              onClick={this.handleItemClick}
+            >
+              <Link to="/signup"><h3>회원가입</h3></Link>
+            </Menu.Item>
+
+            <Menu.Item
+              name="sign in"
+              active={activeItem === 'sign In'}
+              onClick={this.handleItemClick}
+            >
+              <Link to="/signin"><h3>로그인</h3></Link>
+            </Menu.Item>
+          </Menu.Menu>
         </Menu>
-      </Segment>
       );
     }
     return (
@@ -79,7 +73,7 @@ class Navbar extends Component {
           active={activeItem === 'home'}
           onClick={this.handleItemClick}
         >
-          <Link to="/">홈</Link>
+          <Link to="/"><h1>scoop</h1></Link>
         </Menu.Item>
 
         <Menu.Item
@@ -88,9 +82,7 @@ class Navbar extends Component {
           active={activeItem === 'sign out'}
           onClick={this.handleItemClick}
         >
-          <Button>
-            <Link to="/signout">로그아웃</Link>
-          </Button>
+          <Link to="/signout"><h3>로그아웃</h3></Link>
         </Menu.Item>
       </Menu>
     );
