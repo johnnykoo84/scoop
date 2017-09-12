@@ -41,3 +41,11 @@ export const validateSignin = (formProps) => {
 
   return errors;
 }
+
+export const validateNewSpace = (formProps) => {
+  const errors = {};
+
+  if (!formProps.name) {
+    errors.name = '새로운 지점 이름을 입력해 주세요';
+  }
+}

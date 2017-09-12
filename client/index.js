@@ -8,7 +8,7 @@ import reduxThunk from 'redux-thunk';
 // import 'semantic-ui-css/semantic.min.css';
 
 import Landing from './components/landing';
-import Dashboard from './components/dashboard';
+import SelectSpace from './components/select_space';
 import Signin from './components/auth/signin';
 import Signup from './components/auth/signup';
 import Signout from './components/auth/signout';
@@ -16,6 +16,7 @@ import Pricing from './components/pricing';
 import Features from './components/features';
 import LoginFormExample from './examples/loginformexample';
 import SidebarLeft from './examples/sidebar';
+import AddSpace from './components/add_space';
 
 import RequireAuth from './components/auth/require_auth';
 import reducers from './reducers';
@@ -42,15 +43,15 @@ const Root = () => {
       <HashRouter>
         <div>
           <Switch>
-            <Route path="/dashboard" component={RequireAuth(Dashboard)} />
+            <Route path="/selectspace" component={RequireAuth(SelectSpace)} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <Route path="/signout" component={Signout} />
             <Route path="/pricing" component={Pricing} />
             <Route path="/features" component={Features} />
-            <Route path="/dashboard" component={Dashboard} />
             <Route path="/loginexample" component={LoginFormExample} />
             <Route path="/sidebar" component={SidebarLeft} />
+            <Route path="/addspace" component={AddSpace} />
             <Route exact path="/" component={Landing} />
           </Switch>
         </div>

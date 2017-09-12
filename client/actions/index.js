@@ -4,7 +4,7 @@ import {
   UNAUTH_USER,
   AUTH_ERROR,
   FETCH_MESSAGE,
-  FETCH_DASHBOARD
+  FETCH_SPACE_LIST,
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001/api';
@@ -102,7 +102,24 @@ export function fetchDashboardInfo() {
     })
       .then((response) => {
         dispatch({
-          type: FETCH_DASHBOARD,
+          type: FETCH_SPACE_LIST,
+          payload: response.data,
+        });
+      });
+  };
+}
+
+export function addSpace(spaceName) {
+  console.log('spaceName', spaceName);
+  console.log('token', localStorage.getItem('token'))
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/space`, {
+      spaceName,
+      token: localStorage.getItem('token'),
+    })
+      .then((response) => {
+        dispatch({
+          type: FETCH_SPACE_LIST,
           payload: response.data,
         });
       });

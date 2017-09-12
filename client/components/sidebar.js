@@ -1,40 +1,21 @@
 import React, { Component } from 'react'
-import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
 class SidebarLeft extends Component {
-  state = { visible: false }
+  state = { activeItem: 'home' }
 
-  toggleVisibility = () => this.setState({ visible: !this.state.visible })
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
-    const { visible } = this.state
+    const { activeItem } = this.state
+
     return (
-      <div>
-        <Button onClick={this.toggleVisibility}>Toggle Visibility</Button>
-        <Sidebar.Pushable as={Segment}>
-          <Sidebar as={Menu} animation='overlay' width='thin' visible={visible} icon='labeled' vertical inverted>
-            <Menu.Item name='home'>
-              <Icon name='home' />
-              Home
-            </Menu.Item>
-            <Menu.Item name='gamepad'>
-              <Icon name='gamepad' />
-              Games
-            </Menu.Item>
-            <Menu.Item name='camera'>
-              <Icon name='camera' />
-              Channels
-            </Menu.Item>
-          </Sidebar>
-          <Sidebar.Pusher>
-            <Segment basic>
-              <Header as='h3'>Application Content</Header>
-            </Segment>
-          </Sidebar.Pusher>
-        </Sidebar.Pushable>
-      </div>
+      <Menu inverted pointing vertical>
+        <Menu.Item name='지점 선택' active={activeItem === '지점 선택'} onClick={this.handleItemClick} />
+        <Menu.Item name='쪽지' active={activeItem === '쪽지'} onClick={this.handleItemClick} />
+        <Menu.Item name='기타' active={activeItem === '기타'} onClick={this.handleItemClick} />
+      </Menu>
     )
   }
 }
-
 export default SidebarLeft;

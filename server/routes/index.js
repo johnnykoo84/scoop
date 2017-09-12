@@ -18,7 +18,7 @@ router.post('/signup', Auth.signup);
 
 router.get('/dashboard', requireAuth, Dashboard.get);
 
-router.route('/space')
+router.route('/space', requireAuth)
   .get(Space.get)
   .post(Space.post)
 // .delete(Space.delete);

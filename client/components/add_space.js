@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Container, Button, Form, Message } from 'semantic-ui-react';
-import * as actions from '../../actions';
-import FormField from '../../containers/form_field';
-import { validateSignin } from '../utils/validate';
+import * as actions from '../actions';
+import FormField from '../containers/form_field';
+import { validateNewSpace } from './utils/validate';
 
-class Signin extends Component {
-  handleFormValues(values) {
+class AddSpace extends Component {
+  handleFormValues(value) {
     // console.log(values);
     // need to do something to log user in
-    this.props.signinUser(values, () => {
+    this.props.addSpace(value.name, () => {
       this.props.history.push('/selectspace');
     });
   }
@@ -31,32 +31,23 @@ class Signin extends Component {
 
     return (
       <Container>
-        <h1>로그인</h1>
+        <h1>지점 추가</h1>
         <Form
-          name="signinForm"
+          name="addSpaceForm"
           onSubmit={handleSubmit(this.handleFormValues.bind(this))}
         >
           <Field
-            name="email"
+            name="name"
             component={FormField}
             as={Form.Input}
-            type="email"
-            label="Email 주소"
-            placeholder="email 주소를 입력해 주세요"
-          />
-          <br />
-          <Field
-            name="password"
-            component={FormField}
-            as={Form.Input}
-            type="password"
-            label="비밀번호"
-            placeholder="비밀번호를 입력해 주세요"
+            type="text"
+            label="지점 이름"
+            placeholder="새로운 지점 이름을 입력해 주세요"
           />
           {this.renderAlert()}
           <br />
           <Button primary type="submit">
-            로그인
+            추가
           </Button>
         </Form>
       </Container>
@@ -70,6 +61,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, actions)(reduxForm({
-  form: 'signin',
-  validate: validateSignin,
-})(Signin));
+  form: 'add_space',
+  validate: validateNewSpace,
+})(AddSpace));

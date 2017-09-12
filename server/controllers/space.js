@@ -19,11 +19,12 @@ module.exports = {
 
   post:
     (req, res) => {
-      const token = req.headers.authorization;
+      // const token = req.headers.authorization; // for post, client saves token in req.body
+      const { token, spaceName } = req.body;
+      console.log('token', req.body)
+      console.log('spaceName', spaceName);
       const companyId = jwt.decode(token, SECRET).companyId;
-
-      const { spaceName } = req.body;
-
+      console.log('lets see', token, companyId);
       Company.addSpace(companyId, spaceName)
         .then((result) => {
           res.json(result);
