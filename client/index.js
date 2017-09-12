@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, HashRouter, Switch, Route } from 'react-router-dom';
 import reduxThunk from 'redux-thunk';
-// import 'semantic-ui-css/semantic.css'; //  this gives me @ error...I don't know why
+// import 'semantic-ui-css/semantic.min.css'; //  this gives me @ error...I don't know why
+// import 'semantic-ui-css/semantic.min.css';
 
 import Landing from './components/landing';
 import Dashboard from './components/dashboard';

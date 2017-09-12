@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Menu } from 'semantic-ui-react'
+import { Menu, Button, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
@@ -22,13 +22,14 @@ class Navbar extends Component {
 
     if (!this.props.authenticated) {
       return (
-        <Menu>
+        <Segment inverted>
+        <Menu inverted pointing secondary>
           <Menu.Item
             name="home"
             active={activeItem === 'Home'}
             onClick={this.handleItemClick}
           >
-            <Link to="/">홈</Link>
+            <Link to="/">scoop</Link>
           </Menu.Item>
 
           <Menu.Item
@@ -46,13 +47,15 @@ class Navbar extends Component {
           >
             <Link to="/pricing">가격</Link>
           </Menu.Item>
-
+          <Menu.Menu position="right">
           <Menu.Item
             name="sign up"
             active={activeItem === 'Sign Up'}
             onClick={this.handleItemClick}
           >
-            <Link to="/signup">회원가입</Link>
+            <Button primary>
+              <Link to="/signup">회원가입</Link>
+            </Button>
           </Menu.Item>
 
           <Menu.Item
@@ -60,9 +63,13 @@ class Navbar extends Component {
             active={activeItem === 'Sign In'}
             onClick={this.handleItemClick}
           >
-            <Link to="/signin">로그인</Link>
+            <Button>
+              <Link to="/signin">로그인</Link>
+            </Button>
           </Menu.Item>
+        </Menu.Menu>
         </Menu>
+      </Segment>
       );
     }
     return (
@@ -76,19 +83,14 @@ class Navbar extends Component {
         </Menu.Item>
 
         <Menu.Item
-          name="dashboard"
-          active={activeItem === 'dashboard'}
-          onClick={this.handleItemClick}
-        >
-          <Link to="/dashboard">대쉬보드</Link>
-        </Menu.Item>
-
-        <Menu.Item
+          position="right"
           name="sign out"
           active={activeItem === 'sign out'}
           onClick={this.handleItemClick}
         >
-          <Link to="/signout">로그아웃</Link>
+          <Button>
+            <Link to="/signout">로그아웃</Link>
+          </Button>
         </Menu.Item>
       </Menu>
     );

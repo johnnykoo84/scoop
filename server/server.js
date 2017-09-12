@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const configInfo = require('../config');
 const cors = require('cors');
+const helmet = require('helmet');
 
 /* ===========================
   webpack
@@ -62,6 +63,9 @@ app.use(bodyParser.json());
 
 // CORS
 app.use(cors());
+
+// additional security with helmet
+app.use(helmet());
 
 // print the request log on console
 app.use(morgan('dev'));
