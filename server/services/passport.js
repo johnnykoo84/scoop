@@ -32,12 +32,13 @@ const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: config.secret
 };
-
 // create JWT Strategy
 const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
   // see if the user ID in the payload in our database
   // if it does, call 'done' with that other
   // otherwise, call done without a user object
+  console.log('jwtOptions', jwtOptions);
+  console.log('payload', payload)
   User.findById(payload.sub, (err, user) => {
     if (err) { return done(err, false); }
     if (user) {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Container, Button, Form, Message } from 'semantic-ui-react';
 import * as actions from '../../actions';
-import FormField from '../../containers/formfield';
+import FormField from '../../containers/form_field';
 import { validateSignup } from '../utils/validate';
 
 class SignUp extends Component {
