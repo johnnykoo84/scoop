@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List } from 'semantic-ui-react';
 import * as actions from '../actions';
+import SidebarLeft from './sidebar';
 
 class Dashboard extends Component {
   componentWillMount() {
@@ -26,6 +27,9 @@ class Dashboard extends Component {
 
     return (
       <div>
+        <SidebarLeft />
+        <br />
+
         <h2>{this.props.dashboardInfo.name} 관리자 페이지 입니다</h2>
         <br />
         <List selection verticalAlign="middle">
