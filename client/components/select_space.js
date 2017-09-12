@@ -5,18 +5,45 @@ import { Grid, List, Header, Button } from 'semantic-ui-react';
 import * as actions from '../actions';
 import SidebarLeft from './sidebar';
 
-class Dashboard extends Component {
+class SelectSpace extends Component {
   componentWillMount() {
-    this.props.fetchDashboardInfo();
+    this.props.fetchSpaceList();
+  }
+
+
+  // render: function () {
+  //   return (
+  //     <ul onclick="{this._handleClick}">
+  //       // ... render your items here without a click handler
+  //       <li name="item-1" data-name="item-1" value="item-1">Item 1</li>
+  //
+  //     </ul>
+  //   )
+  // },
+  // _handleClick: function (ev, refs) {
+  //   // Access the value from ev.target
+  //   var value = ev.target.value; // For "value" attribute
+  //   // Access your custom data value using dataset
+  //   var dataValue = ev.target.dataset.name; // For "data-name" attribute
+  //   // Access the ref value
+  //   var dataRef = ev.target.refs.name; // For "name" attribute
+  // }
+
+
+  getSpaceId(e, key) {
+    console.log('getSpaceId clicked key=', key);
+    this.props.updateCurrentSpaceId(key, () => {
+      this.props.history.push('/dashboard');
+    });
   }
 
   renderSpaceList() {
-    return this.props.dashboardInfo.spaces.map((space) => {
+    return this.props.dashboardInfo.spaces.map((space, i) => {
       return (
         <List.Item>
           <List.Icon name='building' />
           <List.Content>
-            <List.Header>
+            <List.Header key={space._id} onClick={(e) => this.getSpaceId(e, space._id)}>
               {space.name}
             </List.Header>
           </List.Content>
@@ -25,10 +52,8 @@ class Dashboard extends Component {
     });
   }
 
-
-
   render() {
-    // console.log('this.props', this.props);
+    console.log('this.props.dashboardInfo', this.props.dashboardInfo);
     if (!this.props.dashboardInfo) {
       return <div>Loading...</div>
     }
@@ -67,4 +92,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, actions)(Dashboard);
+export default connect(mapStateToProps, actions)(SelectSpace);

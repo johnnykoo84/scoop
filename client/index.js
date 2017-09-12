@@ -17,6 +17,7 @@ import Features from './components/features';
 import LoginFormExample from './examples/loginformexample';
 import SidebarLeft from './examples/sidebar';
 import AddSpace from './components/add_space';
+import Dashboard from './components/dashboard';
 
 import RequireAuth from './components/auth/require_auth';
 import reducers from './reducers';
@@ -49,6 +50,7 @@ const Root = () => {
             <Route path="/signout" component={Signout} />
             <Route path="/pricing" component={Pricing} />
             <Route path="/features" component={Features} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/loginexample" component={LoginFormExample} />
             <Route path="/sidebar" component={SidebarLeft} />
             <Route path="/addspace" component={AddSpace} />

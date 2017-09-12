@@ -69,9 +69,25 @@ Company.statics.addSpace = function addSpace(companyId, spaceName) {
         .catch(err => Promise.reject('could not add a space', err));
     })
     .catch(err => Promise.reject(err));
-
 };
 
+// get dashboard Info
+Company.statics.getDashBoardInfo = function getDashBoardInfo(companyId, spaceId) {
+  const companyModel = this;
+  return companyModel
+    .where('_id'.toString()).equals(companyId.toString())
+    // .where('spaces').equals()
+    .then((result) => {
+      console.log('HERERERERERER', result)
+    })
+    .catch(err => Promise.reject(err));
+}
+// before adding a new member I need to have api for plan
+// Company.statics.addMember = function addMember(member) {
+//   const companyModel = this;
+//   const { name, email, mobile, teamId, planId, }
+//
+// }
 // this allows remove all users with the company
 // I wouldn't want to remove the company unless company is clean
 // Company.pre('remove', (next) => {

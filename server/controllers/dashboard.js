@@ -5,7 +5,6 @@ const Company = require('../models/company');
 module.exports = {
   get:
     (req, res) => {
-      console.log('req.body', req.body)
       console.log('here we are at DASHBOARD!!!!!!')
       const token = req.headers.authorization;
       console.log('token', token)
