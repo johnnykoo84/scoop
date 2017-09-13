@@ -22,6 +22,10 @@ const PlanSchema = new Schema({
     type: Number,
     required: true,
   },
+  isActive: {
+    type: Boolean,
+    required: true,
+  },z
 });
 
 module.exports = PlanSchema;
