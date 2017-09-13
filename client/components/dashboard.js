@@ -7,29 +7,30 @@ import SidebarLeft from './sidebar';
 
 class Dashboard extends Component {
   componentWillMount() {
-    this.props.fetchDashboardInfo();
+    const selectedSpaceId = this.props.selectedSpace;
+    this.props.fetchSpaceData(selectedSpaceId);
   }
 
-  memberCount() {
-    return this.props.dashboardInfo.spaces.map((member) => {
-      return (
-        <List.Item>
-          <List.Icon name='user' />
-          <List.Content>
-            <List.Header>
-              {member.name}
-            </List.Header>
-          </List.Content>
-        </List.Item>
-      );
-    });
-  }
+  // memberCount() {
+  //   return this.props.selectedSpace.spaces.map((member) => {
+  //     return (
+  //       <List.Item>
+  //         <List.Icon name='user' />
+  //         <List.Content>
+  //           <List.Header>
+  //             {member.name}
+  //           </List.Header>
+  //         </List.Content>
+  //       </List.Item>
+  //     );
+  //   });
+  // }
 
 
 
   render() {
     // console.log('this.props', this.props);
-    if (!this.props.dashboardInfo) {
+    if (!this.props.selectedSpace) {
       return <div>Loading...</div>
     }
 
@@ -42,10 +43,10 @@ class Dashboard extends Component {
             </Grid.Column>
             <Grid.Column width={6}>
               <Header as="h3" color="blue">
-                현재 지점: {this.props.dashboardInfo.name}
+                현재 지점: {this.props.selectedSpace.name}
               </Header>
               <List selection verticalAlign="middle">
-                {this.memberCount()}
+                {/* {this.memberCount()} */}
               </List>
 
             </Grid.Column>
@@ -59,7 +60,7 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    dashboardInfo: state.dashboard.info,
+    dashboardData: state.dashboard.dashboardData,
   };
 }
 

@@ -5,4 +5,6 @@ export const FETCH_MESSAGE = 'fetch_message';
 export const FETCH_SPACE_LIST = 'fetch_space_list';
 export const ADD_SPACE = 'add_space';
 export const FETCH_DASHBOARD_INFO = 'fetch_dashbaord_info';
-export const REQ_ERROR = 'req_error';
+export const REQ_DASHBOARD_ERROR = 'req_dashboard_error';
+export const REQ_SPACELIST_ERROR = 'req_spacelist_error';
+export const SELECT_CURRENT_SPACE = 'select_current_space';

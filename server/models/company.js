@@ -37,7 +37,7 @@ Company.statics.findOneByName = function findOneByName(name) {
   return this.findOne({ name }).exec();
 };
 
-Company.statics.getAllSpaces = function getAllSpaces(companyId) {
+Company.statics.getSpaceList = function getSpaceList(companyId) {
   console.log('companyId right before query', companyId);
   return this.findById(companyId)
     .populate({ path: 'spaces' })
@@ -73,11 +73,12 @@ Company.statics.addSpace = function addSpace(companyId, spaceName) {
 };
 
 // get dashboard Info
-Company.statics.getDashBoardInfo = function getDashBoardInfo(companyId, spaceId) {
+Company.statics.getDashBoardData = function getDashBoardData(companyId, spaceName) {
+  console.log('spacename', spaceName)
   const companyModel = this;
   return companyModel
     .where('_id'.toString()).equals(companyId.toString())
-    // .where('spaces').equals()
+    .elem.where('spaces').equals(spaceName)
     .then((result) => {
       console.log('HERERERERERER', result)
     })

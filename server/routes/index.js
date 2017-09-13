@@ -16,11 +16,10 @@ const Dashboard = require('../controllers/dashboard');
 router.post('/signin', requireSignin, Auth.signin);
 router.post('/signup', Auth.signup);
 
+router.route('/selectspace', requireAuth)
+.get(Space.get);
+
 router.get('/dashboard', requireAuth, Dashboard.get);
 
-router.route('/space', requireAuth)
-  .get(Space.get)
-  .post(Space.post)
-// .delete(Space.delete);
 
 module.exports = router;

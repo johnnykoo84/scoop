@@ -7,12 +7,13 @@ module.exports = {
     (req, res) => {
       const token = req.headers.authorization;
       const companyId = jwt.decode(token, SECRET).companyId;
-
-      Company.getAllSpaces(companyId)
+      console.log('companyId', companyId);
+      Company.getSpaceList(companyId)
         .then((result) => {
           res.json(result);
         })
         .catch((err) => {
+          console.log('err', err);
           res.status(400).send(err);
         });
     },
