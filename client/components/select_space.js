@@ -32,9 +32,7 @@ class SelectSpace extends Component {
 
   getSpaceId(e, key) {
     console.log('getSpaceId clicked key=', key);
-    this.props.updateCurrentSpaceId(key, () => {
-      this.props.history.push('/dashboard');
-    });
+    this.props.updateCurrentSpaceId(key);
   }
 
   renderSpaceList() {
@@ -88,7 +86,7 @@ class SelectSpace extends Component {
 
 function mapStateToProps(state) {
   return {
-    dashboardInfo: state.dashboard.info,
+    dashboardInfo: state.spacelist.info,
   };
 }
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
   FETCH_SPACE_LIST,
   FETCH_DASHBOARD_INFO,
+  REQ_ERROR,
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001/api';
@@ -44,10 +45,22 @@ export const addSpace = (spaceName) => {
       token: localStorage.getItem('token'),
     })
       .then((response) => {
+        console.log('response from the server?', response)
         dispatch({
           type: FETCH_SPACE_LIST,
           payload: response.data,
         });
-      });
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+        dispatch(reqError(error.response.data));
+      })
+  };
+};
+
+export const reqError = (error) => {
+  return {
+    type: REQ_ERROR,
+    payload: error,
   };
 }

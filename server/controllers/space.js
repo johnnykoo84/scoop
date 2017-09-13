@@ -27,9 +27,11 @@ module.exports = {
       console.log('lets see', token, companyId);
       Company.addSpace(companyId, spaceName)
         .then((result) => {
+          console.log('saved result', result)
           res.json(result);
         })
         .catch((err) => {
+          console.log('err from the mognoosemodel', err);
           res.status(400).send(err);
         });
     },

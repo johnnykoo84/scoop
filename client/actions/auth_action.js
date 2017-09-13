@@ -3,6 +3,7 @@ import {
   AUTH_USER,
   UNAUTH_USER,
   FETCH_MESSAGE,
+  AUTH_ERROR,
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001/api';

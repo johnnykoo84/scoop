@@ -55,7 +55,8 @@ Company.statics.addSpace = function addSpace(companyId, spaceName) {
     .elemMatch({ name: spaceName })
     .then((space) => {
       console.log('space already exist', space)
-      if (space) { return Promise.reject('space already exist'); }
+      if (space) { return Promise.reject('같은 이름의 지점 이름이 이미 존재합니다.'); }
+
       return companyModel.findOne({ _id: companyId })
         .then((company) => {
           if (!company) { return Promise.reject('you must add a company first'); }
