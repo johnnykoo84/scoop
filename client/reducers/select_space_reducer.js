@@ -5,7 +5,6 @@ import {
 } from '../actions/types';
 
 export default function (state = {}, action) {
-  console.log('action paylod', action.payload)
   switch (action.type) {
     case FETCH_SPACE_LIST:
       return { ...state, info: action.payload };

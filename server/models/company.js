@@ -39,7 +39,8 @@ Company.statics.findOneByName = function findOneByName(name) {
 
 Company.statics.getSpaceList = function getSpaceList(companyId) {
   console.log('companyId right before query', companyId);
-  return this.findById(companyId)
+  return this
+    .findById(companyId)
     .populate({ path: 'spaces' })
     .then((result) => {
       console.log('actual query result', result)
@@ -50,7 +51,8 @@ Company.statics.getSpaceList = function getSpaceList(companyId) {
 
 Company.statics.addSpace = function addSpace(companyId, spaceName) {
   const companyModel = this;
-  return companyModel.findOne({ _id: companyId })
+  return companyModel
+    .findOne({ _id: companyId })
     .where('spaces')
     .elemMatch({ name: spaceName })
     .then((space) => {
@@ -77,10 +79,11 @@ Company.statics.getDashBoardData = function getDashBoardData(companyId, spaceNam
   console.log('spacename', spaceName)
   const companyModel = this;
   return companyModel
-    .where('_id'.toString()).equals(companyId.toString())
-    .elem.where('spaces').equals(spaceName)
-    .then((result) => {
-      console.log('HERERERERERER', result)
+    .findOne({ _id: companyId })
+    .where('spaces')
+    .elemMatch({ name: spaceName })
+    .then((space) => {
+      console.log('space found', space)
     })
     .catch(err => Promise.reject(err));
 }
