@@ -53,6 +53,7 @@ exports.signup = (req, res, next) => {
 
 // for signin
 exports.signin = (req, res, next) => {
+  console.log('signin before sending a token')
   // console.log('req.header', req.header, 'req.headers', req.headers)
   // user has already had their email and passport auth'd
   // we just need to give them a token

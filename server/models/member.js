@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
+const InvoiceSchema = require('./invoice');
 
 const Member = new Schema({
   name: {
@@ -40,6 +41,7 @@ const Member = new Schema({
     default: false,
     required: true,
   },
+  invoiceHistory: [InvoiceSchema],
 });
 
 module.exports = Member;

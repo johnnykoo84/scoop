@@ -37,9 +37,10 @@ Company.statics.findOneByName = function findOneByName(name) {
   return this.findOne({ name }).exec();
 };
 
-Company.statics.getAllSpaces = function getAllSpaces(companyId) {
+Company.statics.getSpaceList = function getSpaceList(companyId) {
   console.log('companyId right before query', companyId);
-  return this.findById(companyId)
+  return this
+    .findById(companyId)
     .populate({ path: 'spaces' })
     .then((result) => {
       console.log('actual query result', result)
@@ -50,12 +51,14 @@ Company.statics.getAllSpaces = function getAllSpaces(companyId) {
 
 Company.statics.addSpace = function addSpace(companyId, spaceName) {
   const companyModel = this;
-  return companyModel.findOne({ _id: companyId })
+  return companyModel
+    .findOne({ _id: companyId })
     .where('spaces')
     .elemMatch({ name: spaceName })
     .then((space) => {
       console.log('space already exist', space)
-      if (space) { return Promise.reject('space already exist'); }
+      if (space) { return Promise.reject('같은 이름의 지점 이름이 이미 존재합니다.'); }
+
       return companyModel.findOne({ _id: companyId })
         .then((company) => {
           if (!company) { return Promise.reject('you must add a company first'); }
@@ -72,13 +75,15 @@ Company.statics.addSpace = function addSpace(companyId, spaceName) {
 };
 
 // get dashboard Info
-Company.statics.getDashBoardInfo = function getDashBoardInfo(companyId, spaceId) {
+Company.statics.getDashBoardData = function getDashBoardData(companyId, spaceName) {
+  console.log('spacename', spaceName)
   const companyModel = this;
   return companyModel
-    .where('_id'.toString()).equals(companyId.toString())
-    // .where('spaces').equals()
-    .then((result) => {
-      console.log('HERERERERERER', result)
+    .findOne({ _id: companyId })
+    .where('spaces')
+    .elemMatch({ name: spaceName })
+    .then((space) => {
+      console.log('space found', space)
     })
     .catch(err => Promise.reject(err));
 }

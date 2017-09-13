@@ -27,6 +27,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(
   applyMiddleware(reduxThunk)
 ));
+console.log('getstate', store.getState());
 
 // before applying redux-dev-tool
 // const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);

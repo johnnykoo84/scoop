@@ -11,6 +11,7 @@ class AddSpace extends Component {
     // console.log(values);
     // need to do something to log user in
     this.props.addSpace(value.name, () => {
+      console.log('space added successfully')
       this.props.history.push('/selectspace');
     });
   }
@@ -57,7 +58,7 @@ class AddSpace extends Component {
 
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+  return { errorMessage: state.spacelist.error };
 }
 
 export default connect(mapStateToProps, actions)(reduxForm({

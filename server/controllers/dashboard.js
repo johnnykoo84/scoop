@@ -12,15 +12,13 @@ module.exports = {
       console.log('decoded', decoded)
       const companyId = decoded.companyId;
       console.log('companyid before query', companyId)
-      const getAllSpaces = Company.getAllSpaces(companyId);
 
-      Promise.all([getAllSpaces])
-        .then((result) => {
-          console.log('get all space result', result);
-          res.json(result[0]);
-        })
-        .catch((err) => {
-          res.status(400).send(err);
-        });
+      console.log('req.query', req.query);
+
+      const spaceName = req.query.name;
+      console.log('spaceName', spaceName)
+      Company.getDashBoardData(companyId, spaceName)
+        .then()
+        .catch();
     },
 };

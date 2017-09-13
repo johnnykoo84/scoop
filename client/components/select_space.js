@@ -10,40 +10,23 @@ class SelectSpace extends Component {
     this.props.fetchSpaceList();
   }
 
-
-  // render: function () {
-  //   return (
-  //     <ul onclick="{this._handleClick}">
-  //       // ... render your items here without a click handler
-  //       <li name="item-1" data-name="item-1" value="item-1">Item 1</li>
-  //
-  //     </ul>
-  //   )
-  // },
-  // _handleClick: function (ev, refs) {
-  //   // Access the value from ev.target
-  //   var value = ev.target.value; // For "value" attribute
-  //   // Access your custom data value using dataset
-  //   var dataValue = ev.target.dataset.name; // For "data-name" attribute
-  //   // Access the ref value
-  //   var dataRef = ev.target.refs.name; // For "name" attribute
-  // }
-
-
-  getSpaceId(e, key) {
-    console.log('getSpaceId clicked key=', key);
-    this.props.updateCurrentSpaceId(key, () => {
+  handleSelectSpace(e, spaceName) {
+    console.log('handleSelectSpace clicked key=', spaceName);
+    this.props.fetchSpaceData(spaceName, () => {
       this.props.history.push('/dashboard');
     });
   }
 
   renderSpaceList() {
-    return this.props.dashboardInfo.spaces.map((space, i) => {
+    return this.props.spaceListInfo.spaces.map((space, i) => {
       return (
         <List.Item>
-          <List.Icon name='building' />
+          <List.Icon name="building" />
           <List.Content>
-            <List.Header key={space._id} onClick={(e) => this.getSpaceId(e, space._id)}>
+            <List.Header
+              key={space.name}
+              onClick={(e) => this.handleSelectSpace(e, space.name)}
+            >
               {space.name}
             </List.Header>
           </List.Content>
@@ -53,8 +36,8 @@ class SelectSpace extends Component {
   }
 
   render() {
-    console.log('this.props.dashboardInfo', this.props.dashboardInfo);
-    if (!this.props.dashboardInfo) {
+    console.log('this.props.spaceListInfo', this.props.spaceListInfo);
+    if (!this.props.spaceListInfo) {
       return <div>Loading...</div>
     }
 
@@ -67,7 +50,7 @@ class SelectSpace extends Component {
             </Grid.Column>
             <Grid.Column width={6}>
               <Header as="h3" color="blue">
-                {this.props.dashboardInfo.name} 지점 선택
+                {this.props.spaceListInfo.name} 지점 선택
               </Header>
               <List selection verticalAlign="middle">
                 {this.renderSpaceList()}
@@ -88,7 +71,7 @@ class SelectSpace extends Component {
 
 function mapStateToProps(state) {
   return {
-    dashboardInfo: state.dashboard.info,
+    spaceListInfo: state.selectSpace.info,
   };
 }
 
