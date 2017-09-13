@@ -36,7 +36,7 @@ export const fetchDashboardInfo = () => {
   };
 }
 
-export const addSpace = (spaceName) => {
+export const addSpace = (spaceName, callback) => {
   console.log('spaceName', spaceName);
   console.log('token', localStorage.getItem('token'))
   return (dispatch) => {
@@ -50,6 +50,8 @@ export const addSpace = (spaceName) => {
           type: FETCH_SPACE_LIST,
           payload: response.data,
         });
+
+        callback();
       })
       .catch((error) => {
         console.log(error.response.data)
