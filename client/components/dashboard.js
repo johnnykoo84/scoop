@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Grid, List, Header, Button } from 'semantic-ui-react';
 import * as actions from '../actions';
 import SidebarDashboard from './sidebar_dashboard';
+import Navbar from './navbar';
 
 class Dashboard extends Component {
 
@@ -25,6 +26,8 @@ class Dashboard extends Component {
     }
     return (
       <div>
+        <Navbar />
+        <br />
         <Grid columns={2} stackable>
           <Grid.Row>
             <Grid.Column width={5}>
@@ -53,6 +56,7 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
   return {
     dashboardData: state.dashboard.data,
+    authenticated: state.auth.authenticated,
   };
 }
 
