@@ -18,9 +18,9 @@ class SidebarDashboard extends Component {
       <Menu inverted pointing vertical>
         <Menu.Item name='회원' active={activeItem === '회원'} onClick={this.handleItemClick} />
         <Menu.Item name='계약' active={activeItem === '계약'} onClick={this.handleItemClick} />
-        <Menu.Item name='사무실' active={activeItem === '사무실'} onClick={this.handleItemClick} />
+        <Menu.Item name='자리' active={activeItem === '자리'} onClick={this.handleItemClick} />
         <Menu.Item name='대관' active={activeItem === '대관'} onClick={this.handleItemClick} />
-        <Menu.Item name='관리' active={activeItem === '관리'} onClick={this.handleItemClick} />
+        <Menu.Item name='설정' active={activeItem === '설정'} onClick={this.handleItemClick} />
         <Menu.Item name='기타' active={activeItem === '기타'} onClick={this.handleItemClick} />
       </Menu>
     )
