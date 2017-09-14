@@ -19,6 +19,11 @@ const Lead = new Schema({
     trim: true,
     required: true,
   },
+  via: {
+    type: String,
+    enum: ['facebook', 'homepage', 'friend', 'etc'],
+    required: true,
+  },
 });
 
 module.exports = Lead;

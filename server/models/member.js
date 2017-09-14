@@ -16,13 +16,13 @@ const Member = new Schema({
     trim: true,
     required: true,
   },
-  password: {
-    type: String,
-  },
   mobile: {
     type: String,
     trim: true,
     required: true,
+  },
+  password: {
+    type: String,
   },
   teamId: {
     type: ObjectId,
@@ -35,12 +35,24 @@ const Member = new Schema({
     type: Boolean,
     default: false,
   },
+  invoiceHistory: [InvoiceSchema],
   isActive: {
     type: Boolean,
     default: false,
     required: true,
   },
-  invoiceHistory: [InvoiceSchema],
+  statusHistory: [{
+    startDate: {
+      type: Date,
+      required: true,
+    },
+    endDate: {
+      type: Date,
+    },
+    reasonChurn: {
+      type: String,
+    },
+  }],
 });
 
 module.exports = Member;
