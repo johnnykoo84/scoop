@@ -3,18 +3,24 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Grid, List, Header, Button } from 'semantic-ui-react';
 import * as actions from '../actions';
-import SidebarDashboard from './sidebar_dashboard';
+import SidebarLeft from './sidebar';
 
 class Dashboard extends Component {
 
-  memberCount() {
-    const memberCnt = this.props.dashboardData.members.length;
-    return memberCnt;
-  }
 
-  leadCount() {
-    const leadCnt = this.props.dashboardData.leads.length;
-    return leadCnt;
+  memberCount() {
+    return this.props.dashboardData.members.map((member) => {
+      return (
+        <List.Item>
+          <List.Icon name='user' />
+          <List.Content>
+            <List.Header>
+              {member.name}
+            </List.Header>
+          </List.Content>
+        </List.Item>
+      );
+    });
   }
 
 
@@ -28,7 +34,7 @@ class Dashboard extends Component {
         <Grid columns={2} stackable>
           <Grid.Row>
             <Grid.Column width={5}>
-              <SidebarDashboard />
+              <SidebarLeft />
             </Grid.Column>
             <Grid.Column width={6}>
               <Header as="h3" color="blue">
@@ -36,9 +42,6 @@ class Dashboard extends Component {
               </Header>
               <List selection verticalAlign="middle">
                 입주 인원: {this.memberCount()} (명)
-              </List>
-              <List selection verticalAlign="middle">
-                잠재 고객: {this.leadCount()} (명)
               </List>
 
             </Grid.Column>

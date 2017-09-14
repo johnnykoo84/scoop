@@ -92,7 +92,7 @@ Company.statics.getDashBoardData = function getDashBoardData(companyId, spaceNam
     })
     .then((result) => {
       console.log('result found', result);
-      return result;
+      return result.spaces[0];
     })
     .catch(err => Promise.reject(err));
 }

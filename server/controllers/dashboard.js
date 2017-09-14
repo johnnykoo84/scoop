@@ -20,7 +20,7 @@ module.exports = {
       Company.getDashBoardData(companyId, spaceName)
         .then((result) => {
           console.log('controller result', result);
-          return res.json(result);
+          res.json(result);
         })
         .catch((err) => {
           res.status(400).send(err);

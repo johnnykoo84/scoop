@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
 
 const Lead = new Schema({
   name: {
@@ -23,6 +24,9 @@ const Lead = new Schema({
     type: String,
     enum: ['facebook', 'homepage', 'friend', 'etc'],
     required: true,
+  },
+  converted: {
+    type: ObjectId,
   },
 });
 
