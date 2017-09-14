@@ -18,7 +18,12 @@ module.exports = {
       const spaceName = req.query.name;
       console.log('spaceName', spaceName)
       Company.getDashBoardData(companyId, spaceName)
-        .then()
-        .catch();
+        .then((result) => {
+          console.log('controller result', result);
+          return res.json(result);
+        })
+        .catch((err) => {
+          res.status(400).send(err);
+        });
     },
 };
