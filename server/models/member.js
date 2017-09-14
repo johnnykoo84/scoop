@@ -12,7 +12,7 @@ const Member = new Schema({
   email: {
     type: String,
     lowercase: true,
-    // unique: true,
+    unique: true,
     trim: true,
     required: true,
   },
@@ -30,7 +30,6 @@ const Member = new Schema({
   },
   planId: {
     type: ObjectId,
-    required: true,
   },
   isBilled: {
     type: Boolean,

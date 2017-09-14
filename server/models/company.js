@@ -79,11 +79,9 @@ Company.statics.getDashBoardData = function getDashBoardData(companyId, spaceNam
   console.log('spacename', spaceName)
   const companyModel = this;
   return companyModel
-    .findOne({ _id: companyId })
-    .where('spaces')
-    .elemMatch({ name: spaceName })
-    .then((space) => {
-      console.log('space found', space)
+    .findById(companyId)
+    .then((result) => {
+      console.log('result found', result)
     })
     .catch(err => Promise.reject(err));
 }

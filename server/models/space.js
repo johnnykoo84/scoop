@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const Member = require('./member');
 const Room = require('./room');
 const Plan = require('./plan');
+const Lead = require('./lead');
 
 const SpaceSchema = new Schema({
   name: {
@@ -16,6 +17,7 @@ const SpaceSchema = new Schema({
   rooms: [Room],
   members: [Member],
   plans: [Plan],
+  leads: [Lead],
 });
 
 module.exports = SpaceSchema;
