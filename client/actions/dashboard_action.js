@@ -20,7 +20,7 @@ export const fetchSpaceData = (spaceName, callback) => {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then((response) => {
-        console.log('res from server', response);
+        console.log('res from server', response.data);
         dispatch({
           type: FETCH_DASHBOARD_INFO,
           payload: response.data,
@@ -28,8 +28,15 @@ export const fetchSpaceData = (spaceName, callback) => {
         callback();
       })
       .catch((error) => {
+        console.log('error', error)
         console.log(error.response.data);
         dispatch(reqError(error.response.data));
       });
   };
 };
+
+// export const reloadDashboard = (spaceName) => {
+//   return (dispatch) => {
+//     axios.get(`${ROOT_URL}/dashboard`)
+//   }
+// }

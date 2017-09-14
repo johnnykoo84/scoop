@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
 
 class SidebarLeft extends Component {
-  state = { activeItem: 'home' }
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeItem: 'home'
+    }
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
